@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "System Information"
+echo "------------------"
+echo "Hostname: $(hostname)"
+echo "Operating System: $(uname -o)"
+echo "Kernel Version: $(uname -r)"
+echo "CPU Architecture: $(uname -m)"
+echo "Total Memory: $(free -h | awk '/^Mem:/ {print $2}')"
+echo "Available Memory: $(free -h | awk '/^Mem:/ {print $7}')"
+echo "Memory Usage:" $(free -h | awk '/^Mem:/ {print $3}')
+echo "Disk Usage: $(df -h / | awk 'NR==2 {print $5}')"
+echo "Uptime: $(uptime -p)"
+echo "Current Users: $(who | wc -l)"
+echo "Current Date and Time: $(date)"
+echo "IP Address: $(hostname -I | awk '{print $1}')"
