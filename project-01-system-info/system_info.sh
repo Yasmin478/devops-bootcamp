@@ -8,6 +8,7 @@ echo "CPU Architecture: $(uname -m)"
 echo "Total Memory: $(free -h | awk '/^Mem:/ {print $2}')"
 echo "Available Memory: $(free -h | awk '/^Mem:/ {print $7}')"
 echo "Memory Usage:" $(free -h | awk '/^Mem:/ {print $3}')
+echo "Memory Used: $(free -m | awk '/^Mem:/ {printf "%.2f%%\n", ($3/$2)*100}')"
 echo "Disk Usage: $(df -h / | awk 'NR==2 {print $5}')"
 echo "Uptime: $(uptime -p)"
 echo "Current Users: $(who | wc -l)"
