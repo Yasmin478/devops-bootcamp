@@ -5,30 +5,52 @@ PID_FILE="/tmp/${SERVICE_NAME}.pid"
 
 start_service() {
     if [ -f "$PID_FILE" ]; then
-        echo "$SERVICE_NAME is already running."
-        return 1
-    else
-        echo $$ > "$PID_FILE"
-        echo "Starting $SERVICE_NAME..."
-        return 0
+        PID=$(cat "$PID_FILE")
+        if ps -p $PID > /dev/null 2>&1; then
+            echo "$SERVICE_NAME is already running."
+            return 1
+        else
+            echo "Removing stale PID file..."
+            rm -f "$PID_FILE"
+        fi
     fi
+
+    echo "Starting $SERVICE_NAME..."
+    sleep 1000 &
+    echo $! > "$PID_FILE"
+    return 0
 }
 
 stop_service() {
-    if [ -f "$PID_FILE" ]; then
+    if [ ! -f "$PID_FILE" ]; then
+        echo "$SERVICE_NAME is not running."
+        return 1
+    fi
+
+    PID=$(cat "$PID_FILE")
+
+    if ps -p $PID > /dev/null 2>&1; then
         echo "Stopping $SERVICE_NAME..."
+        kill $PID
         rm -f "$PID_FILE"
         return 0
     else
-        echo "$SERVICE_NAME is not running."
+        echo "Process not found. Cleaning up PID file."
+        rm -f "$PID_FILE"
         return 1
     fi
 }
 
 status_service() {
     if [ -f "$PID_FILE" ]; then
-        echo "$SERVICE_NAME is running"
-        return 0
+        PID=$(cat "$PID_FILE")
+        if ps -p $PID > /dev/null 2>&1; then
+            echo "$SERVICE_NAME is running (PID: $PID)"
+            return 0
+        else
+            echo "$SERVICE_NAME is not running but PID file exists."
+            return 1
+        fi
     else
         echo "$SERVICE_NAME is stopped"
         return 1
