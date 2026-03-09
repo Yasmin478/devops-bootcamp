@@ -29,9 +29,8 @@ for repo in "${REPOS[@]}"; do
     else
         log_message "Cloning '$repo_name'..."
         echo "Cloning '$repo_name'..."
-        git clone "$repo" "$repo_path"
-
-        if [ $? -eq 0 ]; then
+       
+        if  git clone "$repo" "$repo_path"; then
             log_message "Successfully cloned '$repo_name'."
             echo "Successfully cloned '$repo_name'."
             echo ""
