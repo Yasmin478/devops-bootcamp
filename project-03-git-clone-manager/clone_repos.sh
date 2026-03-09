@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Directory where the repositories will be stored
+#------Directory where the repositories will be stored
 BASE_DIR="$HOME/devops-bootcamp/project-03-git-clone-manager/repos"
 
-# Log file to keep track of cloned repositories
+#-----Log file to keep track of cloned repositories
 LOG_FILE="$BASE_DIR/clone.log"
 
 mkdir -p "$BASE_DIR"
 
-# List of repositories
+#----List of repositories-------
 REPOS=(
     "https://github.com/octocat/Hello-World.git"
     "https://github.com/github/gitignore.git"
