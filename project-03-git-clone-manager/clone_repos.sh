@@ -1,42 +1,37 @@
 #!/bin/bash
+set -euo pipefail
 
-#------Directory where the repositories will be stored
-BASE_DIR="$HOME/devops-bootcamp/project-03-git-clone-manager/repos"
-
-#-----Log file to keep track of cloned repositories
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+BASE_DIR="$SCRIPT_DIR/repos"
 LOG_FILE="$BASE_DIR/clone.log"
-
 mkdir -p "$BASE_DIR"
 
-#----List of repositories-------
+log(){
+    echo "$(date '+%Y-%m-%d  %H:%M:%S') - $*" | tee -a "$LOG_FILE"  
+}
+
 REPOS=(
     "https://github.com/octocat/Hello-World.git"
     "https://github.com/github/gitignore.git"
     "https://github.com/githubtraining/hellogitworld.git"
-)   
+)
 
-log_message() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOG_FILE"
-}       
-
-for repo in "${REPOS[@]}"; do
-    repo_name=$(basename "$repo" .git)
+for repos in "${REPOS[@]}"; do
+    repo_name=$(basename "$repos" .git)
     repo_path="$BASE_DIR/$repo_name"
 
     if [ -d "$repo_path" ]; then
-        log_message "Repository '$repo_name' already exists. Skipping clone."
-        echo "Repository '$repo_name' already exists. Skipping clone."
+        log "Repository $repo_name already exists at $repo_path. Skipping clone."
     else
-        log_message "Cloning '$repo_name'..."
-        echo "Cloning '$repo_name'..."
-       
-        if  git clone "$repo" "$repo_path"; then
-            log_message "Successfully cloned '$repo_name'."
-            echo "Successfully cloned '$repo_name'."
+        log "Cloning $repo_name"
+        echo ""
+
+        if git clone "$repos" "$repo_path"; then
+            echo ""
+            log "Successfully cloned $repo_name"
             echo ""
         else
-            log_message "Failed to clone '$repo_name'."
-            echo "Failed to clone '$repo_name'."
+            log "Failed to clone $repo_name"
             echo ""
         fi
     fi
