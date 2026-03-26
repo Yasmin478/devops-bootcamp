@@ -1,46 +1,157 @@
 # DevOps Bootcamp
 
+A structured, hands-on journey to becoming a **job-ready DevOps Engineer**, focused on real-world system automation, monitoring, and scripting using Linux and Bash.
+
+---
+
 ## Overview
 
-This repository documents a structured, hands-on DevOps learning journey focused on building strong foundational skills in:
+This repository contains **project-based learning modules** designed to simulate real DevOps tasks such as:
+
+- System monitoring
+- Service management
+- Automation scripting
+- Logging and observability
+
+Each project builds practical skills required in real production environments.
+
+---
+
+## Tech Stack
 
 - Linux
-- Shell scripting (Bash)
-- Git and GitHub
-- Networking fundamentals
-- Automation principles
-
-The goal of this bootcamp is to develop practical, real-world DevOps capabilities through incremental projects and hands-on exercises.
+- Bash Scripting
+- Git & GitHub
+- System Monitoring Tools
+- Cron Jobs & Automation
 
 ---
 
 ## Repository Structure
-
-This repository is organized into project-based modules.
-
-### Project 01 – System Information Script
-
-A Bash-based system monitoring tool that:
-
-- Collects system metrics (CPU, memory, disk usage)
-- Logs output to a file
-- Implements basic alert logic
-- Practices conditional statements and scripting fundamentals
-
-More projects will be added as the learning journey progresses.
+project-01-system-info/ project-02-service-manager/ project-03-git-clone-manager/ project-04-server-monitor/
 
 ---
 
-## Objectives
+## Projects
 
-- Build strong command-line proficiency  
-- Develop practical scripting skills  
-- Understand version control workflows  
-- Apply DevOps best practices through hands-on implementation  
+---
+
+### 🔹 Project 01: System Info Script
+
+A simple Bash script to display system information.
+
+**Features:**
+- OS details
+- CPU and memory info
+- Uptime tracking
+
+**Skills:**
+- Basic scripting
+- Linux commands
+
+---
+
+### 🔹 Project 02: Service Manager
+
+A CLI tool to manage system services using `systemctl`.
+
+**Features:**
+- Start / Stop / Restart / Status
+- Argument parsing
+- Case-insensitive input
+- Logging with timestamps
+
+**Skills:**
+- Functions
+- Exit codes
+- Service management
+
+---
+
+### 🔹 Project 03: Git Clone Manager
+
+Automates cloning multiple repositories efficiently.
+
+**Features:**
+- Clone multiple repos
+- Skip already cloned repos
+- Logging system
+- Counters (success/failure)
+- Safe scripting (`set -euo pipefail`)
+
+**Skills:**
+- Arrays and loops
+- Idempotency
+- Automation design
+
+---
+
+### ⭐ Project 04: Server Health Monitor (Featured)
+
+A production-style monitoring script that tracks system health.
+
+**Features:**
+- CPU, Memory, Disk monitoring
+- System uptime
+- Top processes tracking
+- Structured logging
+- Cron automation
+
+**Upcoming Improvements:**
+-  Alert system (threshold-based)
+-  Log rotation
+-  Enhanced output formatting
+
+**Skills:**
+- System monitoring tools (`ps`, `top`, `df`, `free`)
+- Logging strategies
+- Observability basics
+
+---
+
+## Current Progress
+
+-  4 Projects Completed
+-  Enhancing scripts to production-level quality
+-  Preparing for CI/CD and containerization
+
+---
+
+## Learning Approach
+
+- Hands-on project building
+- Real-world problem solving
+- Writing clean, maintainable scripts
+- Focus on production-style practices
+
+---
+
+## Roadmap
+
+- **March–April:** Linux, Bash, Automation  
+- **May:** Git + CI/CD  
+- **June:** Docker  
+- **July:** Kubernetes + AWS  
+- **August:** Final prep + interviews  
+
+---
+
+## Future Projects
+
+- Log Analyzer
+- Backup Automation
+- CI/CD Pipeline
+- Dockerized Applications
+
+---
+
+## Note
+
+This repository is actively being improved to reflect **real DevOps practices** and production-level scripting standards.
 
 ---
 
 ## Author
 
-**Yasmin**  
-DevOps learner building production-ready foundational skills.
+**Yasmin Islam**  
+DevOps Learner | Future Cloud Engineer
