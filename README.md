@@ -96,11 +96,9 @@ A production-style monitoring script that tracks system health.
 - Top processes tracking
 - Structured logging
 - Cron automation
-
-**Upcoming Improvements:**
--  Alert system (threshold-based)
--  Log rotation
--  Enhanced output formatting
+- Alert system (threshold-based)
+- Log rotation
+- Enhanced output formatting
 
 **Skills:**
 - System monitoring tools (`ps`, `top`, `df`, `free`)
