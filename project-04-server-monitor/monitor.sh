@@ -1,21 +1,27 @@
 #!/bin/bash
 set -euo pipefail
-trap 'log "Script interrupted!"' SIGINT SIGTERM
+trap 'log "ERROR" "Script interrupted!"' SIGINT SIGTERM
 
-#------Configuration
+if [[ "${1:-}" == "--no-output" ]]; then
+    SILENT=true
+else
+    SILENT=false
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="$SCRIPT_DIR/config.conf"
+
+if [[ -f "$CONFIG_FILE" ]]; then
+    source "$CONFIG_FILE"
+else
+    echo "Config file not found!"
+    exit 1
+fi
+
 
 LOG_DIR="./logs"
 LOG_FILE="$LOG_DIR/system.log"
 
-MAX_LOG_SIZE=1000000 #1MB
-MAX_LOG_FILE=5
-
-CPU_THRESHOLD=80
-MEM_THRESHOLD=75
-DISK_THRESHOLD=90
-
-
-#------Setup
 
 mkdir -p "$LOG_DIR"
 
@@ -23,8 +29,12 @@ timestamp(){
 	date "+%Y-%m-%d %H:%M:%S"
 } 
 
-log(){
-	echo "$(timestamp) | $1" | tee -a "$LOG_FILE"
+log() {
+    local level=$1
+    shift
+    local message="$*"
+
+    echo "$(timestamp) [$level] $message" | tee -a "$LOG_FILE"
 }
 
 #------Log rotation
@@ -34,10 +44,11 @@ rotate_logs(){
 		size=$(stat -c%s "$LOG_FILE" 2>/dev/null || stat -f%z "$LOG_FILE")
 
 		if (( size > MAX_LOG_SIZE )); then
-			log "Log size exceeded. Rotating logs..."
+			log "INFO" "Log size exceeded. Rotating logs..."
 			
-			rm -f "$LOG_FILE.$MAX_LOG_FILE"
-			for (( i=MAX_LOG_FILE; i>=1; i-- )); do
+			rm -f "$LOG_FILE.$MAX_LOG_FILES"
+
+			for (( i=MAX_LOG_FILES; i>=1; i-- )); do
 				if [[ -f "$LOG_FILE.$i" ]]; then
 					mv "$LOG_FILE.$i" "$LOG_FILE.$(( i+1 ))"
 				fi
@@ -72,41 +83,55 @@ check_alerts(){
     local disk=$3
 
 	if (( ${cpu%.*} > CPU_THRESHOLD )); then
-		log "ALERT: HIGH CPU USAGE - ${cpu}%"
+		log "WARN" "HIGH CPU USAGE: ${cpu}%"
 	fi
 
 	if (( ${mem%.*} > MEM_THRESHOLD )); then
-		log "ALERT: HIGH MEMORY USAGE - ${mem}%"
+		log "WARN" "HIGH MEMORY USAGE: ${mem}%"
 	fi
 
 	if (( ${disk%.*} > DISK_THRESHOLD )); then
-		log "ALERT: HIGH DISK USAGE - ${disk}%"
+		log "ALERT" "HIGH DISK USAGE: ${disk}%"
 	fi
 }
 
 #------Display Output
 
-print_report(){
+print_report() {
     local cpu=$1
     local mem=$2
     local disk=$3
 
-	echo "================================="
-	echo "----- System Monitor Report -----"
-	echo "================================="
-	echo "Time        : $(timestamp)"
-	echo "Host		  : $(hostname)"
-	echo "CPU Usage   : ${cpu}%"
-	echo "Memory Usage: ${mem}%"
-	echo "Disk Usage  : ${disk}%"
-	echo "Uptime	  : $(uptime -p)"
-	echo "---------------------------------"
-	echo "Top Processes (CPU):"
-	ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6
-	echo "---------------------------------"
+    echo ""
+    echo "=============================================="
+    echo "           SYSTEM HEALTH REPORT"
+    echo "=============================================="
+    printf "%-20s : %s\n" "Time" "$(timestamp)"
+	printf "%-20s : %s\n" "Hostname" "$(hostname)"
+    printf "%-20s : %s%%\n" "CPU Usage" "$cpu"
+    printf "%-20s : %s%%\n" "Memory Usage" "$mem"
+    printf "%-20s : %s%%\n" "Disk Usage" "$disk"
+    printf "%-20s : %s\n" "Uptime" "$(uptime -p)"
+    echo "----------------------------------------------"
+
+    echo "Top Processes (CPU):"
+    printf "%-8s %-20s %-6s\n" "PID" "COMMAND" "%CPU"
+	printf "%-8s %-20s %-6s\n" "--------" "--------------------" "------"		
+    ps -eo pid,comm,%cpu --sort=-%cpu | sed 1d | grep -Ev "ps|monitor.sh" | head -n 5 | \
+	while read pid comm cpu; do
+    	printf "%-8s %-20s %-6s\n" "$pid" "$comm" "$cpu"
+	done
+	echo "----------------------------------------------"
+
 	echo "Top Processes (Memory):"
-	ps -eo pid,comm,%mem --sort=-%mem | head -n 6
-	echo "================================="
+	printf "%-8s %-20s %-6s\n" "PID" "COMMAND" "%MEM"
+	printf "%-8s %-20s %-6s\n" "--------" "--------------------" "------"		
+	ps -eo pid,comm,%mem --sort=-%mem | sed 1d | grep -Ev "ps|monitor.sh" | head -n 5 | \
+	while read pid comm mem; do
+    	printf "%-8s %-20s %-6s\n" "$pid" "$comm" "$mem"
+	done	
+
+    echo "=============================================="
 }
 
 
@@ -119,8 +144,11 @@ main(){
     mem=$(get_memory_usage)
     disk=$(get_disk_usage)
 
-    print_report "$cpu" "$mem" "$disk"
-    log "CPU: ${cpu}% | Memory: ${mem}% | Disk: ${disk}%"
+    if [[ "$SILENT" == false ]]; then
+    	print_report "$cpu" "$mem" "$disk"
+	fi
+
+    log "INFO" "CPU: ${cpu}% | Memory: ${mem}% | Disk: ${disk}%"
     check_alerts "$cpu" "$mem" "$disk"
 }
 main
