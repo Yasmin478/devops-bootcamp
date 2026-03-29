@@ -7,8 +7,9 @@ if [[ ! -f "$LOG_FILE" ]]; then
     echo "Error: Log file '$LOG_FILE' not found."
     exit 1
 fi  
-
+echo "============================================="
 echo "Analyzing log file: $LOG_FILE"
+echo "--------------------------------------"
 
 total_lines=$(wc -l < "$LOG_FILE")
 error_count=$(grep -c "ERROR" "$LOG_FILE" || true)
@@ -20,4 +21,14 @@ echo "INFO count  : $info_count"
 echo "WARN count  : $warn_count"
 echo "ERROR count : $error_count"
 
+echo ""
+echo "------ Recent Errors ------"
+grep "ERROR" "$LOG_FILE" | tail -n 5 || echo "No errors found." 
+
+echo ""
+echo "------ Top Error Messages ------"
+grep "ERROR" "$LOG_FILE" | awk '{$1=$2=""; print $0}' | sort | uniq -c | sort -nr | head -n 5 || echo "No errors found."
+
+echo ""
 echo "Log analysis completed successfully."
+echo "============================================="
