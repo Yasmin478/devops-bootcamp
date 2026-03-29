@@ -28,7 +28,11 @@ Each project builds practical skills required in real production environments.
 ---
 
 ## Repository Structure
-project-01-system-info/ project-02-service-manager/ project-03-git-clone-manager/ project-04-server-monitor/
+project-01-system-info/
+project-02-service-manager/
+project-03-git-clone-manager/
+project-04-server-monitor/
+project-05-log-analyzer/
 
 ---
 
@@ -107,9 +111,30 @@ A production-style monitoring script that tracks system health.
 
 ---
 
+### ⭐ Project 05: Log Analyzer
+
+A practical log analysis tool built using Bash to simulate real-world debugging and troubleshooting workflows.
+
+**Features:**
+- Analyze log files for insights
+- Count INFO, WARN, and ERROR entries
+- Display recent error logs
+- Identify top recurring error messages
+- Keyword-based filtering
+- Date-based log filtering
+
+**Skills:**
+- Log parsing using `grep`, `awk`, `sort`, `uniq`
+- Data extraction and summarization
+- Debugging real-world issues
+- Script flexibility with arguments
+
+---
+
 ## Current Progress
 
--  4 Projects Completed
+-  5 Projects Completed
+-  Building real-world debugging and log analysis skills
 -  Enhancing scripts to production-level quality
 -  Preparing for CI/CD and containerization
 
@@ -136,7 +161,6 @@ A production-style monitoring script that tracks system health.
 
 ## Future Projects
 
-- Log Analyzer
 - Backup Automation
 - CI/CD Pipeline
 - Dockerized Applications
@@ -151,5 +175,5 @@ This repository is actively being improved to reflect **real DevOps practices** 
 
 ## Author
 
-**Yasmin Islam**  
+**Yasmin Ara Islam**  
 DevOps Learner | Future Cloud Engineer
