@@ -1,9 +1,30 @@
 #!/bin/bash
 set -euo pipefail
 
-LOG_FILE="${1:-sample.log}"
-KEYWORD="${2:-}"
-DATE_FILTER="${3:-}"
+LOG_FILE="sample.log"
+KEYWORD=""
+DATE_FILTER=""
+
+usage() {
+    echo "Usage: $0 [-f log_file] [-k keyword] [-d date]"
+    echo ""
+    echo "Options:"
+    echo "  -f    Log file (default: sample.log)"
+    echo "  -k    Keyword filter (e.g., ERROR)"
+    echo "  -d    Date filter (e.g., 2026-03-28)"
+    echo "  -h    Show this help message"
+}
+
+while getopts "f:k:d:h" opt; do
+    case $opt in
+        f) LOG_FILE="$OPTARG" ;;
+        k) KEYWORD="$OPTARG" ;;
+        d) DATE_FILTER="$OPTARG" ;;
+        h) usage; exit 0 ;;
+        *) usage; exit 1 ;;
+    esac
+done
+
 
 if [[ ! -f "$LOG_FILE" ]]; then
     echo "Error: Log file '$LOG_FILE' not found."
@@ -24,30 +45,40 @@ if [[ -n "$DATE_FILTER" ]]; then
 fi
 
 
-echo "============================================="
-echo "Analyzing log file: $LOG_FILE"
-echo "--------------------------------------"
+echo ""
+echo "=============================================="
+echo "           LOG ANALYSIS REPORT"
+echo "=============================================="
+printf "%-20s : %s\n" "Log File" "$LOG_FILE"
+printf "%-20s : %s\n" "Keyword Filter" "${KEYWORD:-None}"
+printf "%-20s : %s\n" "Date Filter" "${DATE_FILTER:-None}"
+echo "----------------------------------------------"
 
 total_lines=$(wc -l < "$FILTERED_LOG")
 error_count=$(grep -c "ERROR" "$FILTERED_LOG" || true)
 warn_count=$(grep -c "WARN" "$FILTERED_LOG" || true)
 info_count=$(grep -c "INFO" "$FILTERED_LOG" || true)
 
-echo "Total lines : $total_lines"
-echo "INFO count  : $info_count"
-echo "WARN count  : $warn_count"
-echo "ERROR count : $error_count"
+printf "%-20s : %s\n" "Total Lines" "$total_lines"
+printf "%-20s : %s\n" "INFO Count" "$info_count"
+printf "%-20s : %s\n" "WARN Count" "$warn_count"
+printf "%-20s : %s\n" "ERROR Count" "$error_count"
 
 echo ""
-echo "------ Recent Errors ------"
+echo "----------------------------------------------"
+echo "Recent Errors (Last 5)"
+echo "----------------------------------------------"
 grep "ERROR" "$FILTERED_LOG" | tail -n 5 || echo "No errors found." 
 
 echo ""
-echo "------ Top Error Messages ------"
+echo "----------------------------------------------"
+echo "Top Error Messages"
+echo "----------------------------------------------"
 grep "ERROR" "$FILTERED_LOG" | awk '{$1=$2=""; print $0}' | sort | uniq -c | sort -nr | head -n 5 || echo "No errors found."
 
 echo ""
-echo "Log analysis completed successfully."
-echo "============================================="
+echo "=============================================="
+echo " Log analysis completed successfully"
+echo "=============================================="
 
 [[ "$FILTERED_LOG" != "$LOG_FILE" ]] && rm -f "$FILTERED_LOG"
