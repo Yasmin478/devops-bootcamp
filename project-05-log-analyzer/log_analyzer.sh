@@ -42,7 +42,7 @@ if [[ -n "$DATE_FILTER" ]]; then
     TEMP_FILE=$(mktemp)
     grep "$DATE_FILTER" "$FILTERED_LOG" > "$TEMP_FILE" || true
     FILTERED_LOG="$TEMP_FILE"
-fi
+fi 
 
 
 echo ""
@@ -68,13 +68,25 @@ echo ""
 echo "----------------------------------------------"
 echo "Recent Errors (Last 5)"
 echo "----------------------------------------------"
-grep "ERROR" "$FILTERED_LOG" | tail -n 5 || echo "No errors found." 
+errors=$(grep "ERROR" "$FILTERED_LOG" || true)
+
+if [[ -z "$errors" ]]; then
+    echo "No errors found."
+else
+    echo "$errors" | tail -n 5
+fi
 
 echo ""
 echo "----------------------------------------------"
 echo "Top Error Messages"
 echo "----------------------------------------------"
-grep "ERROR" "$FILTERED_LOG" | awk '{$1=$2=""; print $0}' | sort | uniq -c | sort -nr | head -n 5 || echo "No errors found."
+top_errors=$(grep "ERROR" "$FILTERED_LOG" | awk '{$1=$2=""; print $0}' | sort | uniq -c | sort -nr || true)
+
+if [[ -z "$top_errors" ]]; then
+    echo "No errors found."
+else
+    echo "$top_errors" | head -n 5
+fi
 
 echo ""
 echo "=============================================="

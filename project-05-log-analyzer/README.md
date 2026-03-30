@@ -2,22 +2,22 @@
 
 ## Overview
 
-The **Log Analyzer** is a Bash-based tool designed to analyze log files and extract meaningful insights.
+The **Log Analyzer** is a Bash-based CLI tool designed to analyze log files and extract useful insights for debugging and monitoring.
 
-It simulates real-world DevOps debugging scenarios by identifying errors, summarizing logs, and filtering data based on keywords and timestamps.
+It simulates real-world DevOps workflows by filtering logs, identifying errors, and summarizing issues.
 
 ---
 
 ## Features
 
 - Analyze log files
-- Count total log entries
-- Count INFO, WARN, ERROR logs
-- Display recent error messages
+- Count INFO, WARN, ERROR entries
+- Display recent errors
 - Identify top recurring errors
 - Keyword-based filtering
 - Date-based filtering
-- Argument-based input handling
+- CLI support using flags (`-f`, `-k`, `-d`, `-h`)
+- Clean and structured output
 
 ---
 
@@ -25,70 +25,56 @@ It simulates real-world DevOps debugging scenarios by identifying errors, summar
 project-05-log-analyzer/
 ├── log_analyzer.sh
 ├── sample.log
+├── screenshots/
+│ ├── normal.png
+│ ├── filter.png
+│ └── help.png
 └── README.md
 
 
 ---
 
-## How It Works
-
-1. Accepts a log file as input
-2. Optionally filters logs using:
-   - Keyword
-   - Date
-3. Performs analysis:
-   - Counts log levels
-   - Extracts recent errors
-   - Identifies most frequent issues
-
----
-
 ##  Usage
 
-### Run with default log file:
-
+### Default run
 ```bash
 ./log_analyzer.sh
 
-### Run with custom log file:
+### Custom file
+./log_analyzer.sh -f sample.log
 
-./log_analyzer.sh sample.log
+### Filter by keyword
+./log_analyzer.sh -k ERROR
 
-### Filter by keyword:
-./log_analyzer.sh sample.log ERROR
+### Filter by keyword + date
+./log_analyzer.sh -k ERROR -d "2026-03-28"
 
-### Filter by keyword and date:
-./log_analyzer.sh sample.log ERROR "2026-03-28"
+### Help
+./log_analyzer.sh -h
 
+## Sample Output
+- Normal Run
 
+- Filtered Run
+
+- Help Menu
 
 ## DevOps Concepts Used
-- Log analysis and debugging
+- Log analysis & debugging
 - Text processing (grep, awk, sort, uniq)
+- CLI argument parsing (getopts)
 - Data filtering and summarization
-- Argument handling in Bash
 - Automation scripting
 
 
-## Example Use Case
-- Identify frequent application errors
-- Debug failed API calls
-- Monitor system/application logs
+## Use Cases
+- Debug application errors
+- Analyze system logs
+- Identify recurring issues
 - Investigate production incidents
-
-
-
-## Future Improvements
-- Support for multiple log formats
-- JSON log parsing
-- Export summary reports
-- Integration with monitoring tools
 
 
 ## Author
 
-### Yasmin Ara Islam
+Yasmin Ara Islam
 DevOps Bootcamp Project
-
-
----
