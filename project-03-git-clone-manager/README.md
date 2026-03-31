@@ -11,6 +11,11 @@ This project demonstrates practical Bash scripting skills commonly used in DevOp
 
 ## Features
 
+* Uses strict Bash mode (set -euo pipefail) for safer execution
+* Logs output to both terminal and file using tee
+* Provides cloning summary (cloned, skipped, failed)
+* Validates Git installation before execution
+* Portable script (runs from any directory)
 * Clone multiple repositories automatically
 * Skip repositories that already exist
 * Log cloning activity with timestamps
@@ -25,13 +30,33 @@ This project demonstrates practical Bash scripting skills commonly used in DevOp
 project-03-git-clone-manager/
 │
 ├── clone_repos.sh
-├── repos/
-│   ├── Hello-World/
-│   ├── gitignore/
-│   └── hellogitworld/
-│
-└── clone.log
+└── repos/
+    ├── Hello-World/
+    ├── gitignore/
+    ├── hellogitworld/
+    └── clone.log
 ```
+
+---
+
+## Logging
+
+Logs are stored at:
+    -  repos/clone.log
+- Includes timestamps for all actions
+- Logs both successful and failed operations
+- Output is displayed in terminal and saved to file
+
+---
+
+## Error Handling
+
+The script handles:
+
+- Missing Git installation
+- Clone failures
+- Existing repositories
+- Script failures using strict mode (set -euo pipefail)
 
 ---
 
@@ -80,9 +105,13 @@ Run the script:
 
 ```
 Cloning 'Hello-World'...
+
 Successfully cloned 'Hello-World'.
 
 Repository 'gitignore' already exists. Skipping clone.
+
+Cloning summary: 2 cloned, 1 skipped, 0 failed.
+
 ```
 
 ---
@@ -105,18 +134,16 @@ These are common scripting techniques used in DevOps environments.
 
 ## Future Improvements
 
-Possible enhancements:
-
-* Accept repository URLs from a file
-* Add parallel cloning
-* Add error handling improvements
-* Add command-line arguments
+* Accept repository URLs from external file (config-driven)
+* Add parallel cloning for faster execution
+* Add retry mechanism for failed clones
+* Add CLI arguments support
+* Integrate with CI/CD pipelines
 
 ---
 
 ## Author
 
-Yasmin
+**Yasmin Ara Islam**
 
 Created as part of a DevOps learning path focused on Bash automation and Git workflow.
-
