@@ -66,7 +66,7 @@ This project is part of my DevOps learning journey, focusing on system monitorin
 ---
 
 ## Sample Output
-
+```
 ------------------------------------------
 System Summary - Tue Mar 26
 ------------------------------------------
@@ -82,6 +82,7 @@ CPU Load: 0.15, 0.10, 0.05
 Memory Usage: 45%
 Disk Usage (/): 60%
 ------------------------------------------
+```
 
 ## Log File
 
