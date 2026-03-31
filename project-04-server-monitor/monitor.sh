@@ -1,17 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
-
-LOG_DIR="./logs"
-LOG_FILE="$LOG_DIR/system.log"
-
-
-mkdir -p "$LOG_DIR"
-
-
+#------Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_FILE="$SCRIPT_DIR/config.conf"
 
+LOG_DIR="$SCRIPT_DIR/logs"
+LOG_FILE="$LOG_DIR/system.log"
+
+mkdir -p "$LOG_DIR"
+
+#------Load Config
 
 if [[ -f "$CONFIG_FILE" ]]; then
     source "$CONFIG_FILE"
@@ -20,6 +19,7 @@ else
     exit 1
 fi
 
+#------Command-line options
 
 if [[ "${1:-}" == "--no-output" ]]; then
     SILENT=true
@@ -27,6 +27,7 @@ else
     SILENT=false
 fi
 
+#------Logging
 
 timestamp(){
 	date "+%Y-%m-%d %H:%M:%S"
@@ -44,6 +45,7 @@ log() {
 	fi
 }
 
+#------Signal Handling
 
 trap 'log "ERROR" "Script interrupted!"' SIGINT SIGTERM
 
