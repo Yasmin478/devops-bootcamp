@@ -96,5 +96,6 @@ Detailed logs are stored in:
 
 ## Author
 
-Yasmin Ara Islam
+**Yasmin Ara Islam**
+
 DevOps Bootcamp Project

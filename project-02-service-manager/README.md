@@ -26,7 +26,7 @@ This script allows starting, stopping, restarting, and checking the status of se
 
 ## Logging
 - Logs are stored at:
-        ~/Projects/devops-bootcamp/project-02-service-manager/logs/service.log
+      -  ~/Projects/devops-bootcamp/project-02-service-manager/logs/service.log
 - Each action is recorded with timestamp:
 - Service start/stop/restart/status
 - Errors (invalid service, failures)
@@ -128,5 +128,6 @@ Open for learning and experimentation.
 
 ## Author
 
-Yasmin Ara Islam
+**Yasmin Ara Islam** 
+
 DevOps Bootcamp Project
