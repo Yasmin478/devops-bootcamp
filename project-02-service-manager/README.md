@@ -9,8 +9,9 @@ This script allows starting, stopping, restarting, and checking the status of se
 ---
 
 ## Features
-- Manage services using systemctl
-- Supports actions: <start|stop|restart|status>
+
+- Manage services using `systemctl`
+- Supports actions: `start`| `stop` | `restart` | `status`
 - Accepts arguments in **both formats**: `service action`,  `action service`
 - Case-insensitive input**  `NGINX`, `nginx`, `Nginx` all work
 - Built-in **usage help and argument validation**
@@ -25,8 +26,9 @@ This script allows starting, stopping, restarting, and checking the status of se
 ---
 
 ## Logging
+
 - Logs are stored at:
-      -  ~/Projects/devops-bootcamp/project-02-service-manager/logs/service.log
+      `~/Projects/devops-bootcamp/project-02-service-manager/logs/service.log`
 - Each action is recorded with timestamp:
 - Service start/stop/restart/status
 - Errors (invalid service, failures)
@@ -34,12 +36,14 @@ This script allows starting, stopping, restarting, and checking the status of se
 ---
 
 ## Requirements
+
 - Linux system with **systemd**
 - Bash shell
 
 ---
 
 ## Usage
+
 ```
 ./service-manager.sh <service> <action>
 ```
@@ -51,13 +55,15 @@ or
 ---
 
 ## Exit Codes
-- 0 → Success
-- 1 → Invalid arguments
-- 2 → Service not found
+
+- `0` → Success
+- `1` → Invalid arguments
+- `2` → Service not found
 
 ---
 
 ## Available Actions
+
 - start
 - stop
 - restart
@@ -66,6 +72,7 @@ or
 ---
 
 ## Examples
+
 - Start nginx
 
 ```
@@ -96,13 +103,14 @@ The script checks for:
 
 - Missing arguments
 - Invalid commands (not start/stop/restart/status)
-- Non-existent services (validated via systemctl)
+- Non-existent services (validated via `systemctl`)
 
 If an invalid command is used, it prints a helpful usage message.
 
 ---
 
 ## Project Purpose
+
 This project was built as part of learning **Linux automation and DevOps scripting**, focusing on:
 
 - Bash scripting
@@ -113,16 +121,12 @@ This project was built as part of learning **Linux automation and DevOps scripti
 ---
 
 ## Future Improvements
+
 - Add log rotation
 - Add email/Slack alerts
 - Add bulk service management
 - Integrate with monitoring tools
 
----
-
-## License
-
-Open for learning and experimentation.
 
 ---
 

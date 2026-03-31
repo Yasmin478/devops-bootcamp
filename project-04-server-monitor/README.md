@@ -15,17 +15,19 @@ It simulates real-world DevOps monitoring workflows by incorporating logging, al
 - Display top processes by CPU usage
 - External configuration using `config.conf`
 - Threshold-based alerting (CPU, Memory, Disk)
-- Structured logging with levels (INFO, WARN, ERROR)
+- Structured logging with levels (`INFO`, `WARN`, `ERROR`)
 - Log rotation to prevent log overflow
 - Modular Bash functions
 - CLI flag support (`--no-output` for silent mode)
-- Graceful handling of script interruption (SIGINT, SIGTERM)
+- Graceful handling of script interruption (`SIGINT`, `SIGTERM`)
 - Automation using cron jobs
 - Safe scripting using `set -euo pipefail`
 
 ---
 
 ## Project Structure
+
+```
 project-04-server-monitor/
 │
 ├── monitor.sh
@@ -37,6 +39,7 @@ project-04-server-monitor/
 │   ├── Alert.png
 │   └── Sigint.png
 └── README.md
+```
 
 ---
 
@@ -65,11 +68,11 @@ MAX_LOG_FILES=5
 1. The script loads configuration from `config.conf`
 
 2. Collects system metrics using:
-      - top → CPU usage
-      - free → memory usage
-      - df → disk usage
-      - uptime → system uptime
-      - ps → process monitoring
+      - `top` → CPU usage
+      - `free` → memory usage
+      - `df` → disk usage
+      - `uptime` → system uptime
+      - `ps` → process monitoring
 
 3. Outputs:
       - Clean formatted report in terminal
@@ -106,19 +109,19 @@ MAX_LOG_FILES=5
 
 - Normal Execution
 - Alert Trigger
-- Interrupted Execution (SIGINT)
+- Interrupted Execution (`SIGINT`)
 
 ---
 
 ## Logging
 
 Logs are stored in:
-   logs/system.log
+   `logs/system.log`
 
 Each log entry includes:
 
 - Timestamp
-- Log level (INFO, WARN, ERROR)
+- Log level (`INFO`, `WARN`, `ERROR`)
 - System metrics
 - Alerts (if triggered)
 
@@ -140,7 +143,9 @@ Run every 5 minutes:
 ```
    crontab -e
 ```
+
 Add:
+
 ```
    */5 * * * * /bin/bash /home/yasmin/devops-bootcamp/project-04-server-monitor/monitor.sh --no-output
 ```
@@ -156,14 +161,14 @@ Add:
 - Config-driven scripting
 - Process management
 - Cron scheduling
-- Error handling (set -euo pipefail)
-- Signal handling (SIGINT, SIGTERM)
+- Error handling (`set -euo pipefail`)
+- Signal handling (`SIGINT`,`SIGTERM`)
 
 ---
 
 ## Debugging & Fixes
 
-- Fixed unbound variable issues (set -u)
+- Fixed unbound variable issues (`set -u`)
 - Corrected log rotation variable handling
 - Resolved duplicate process header issue
 - Improved cross-platform compatibility for stat

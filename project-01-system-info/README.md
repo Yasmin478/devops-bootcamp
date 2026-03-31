@@ -26,39 +26,47 @@ This project is part of my DevOps learning journey, focusing on system monitorin
 ---
 
 🔹 Alert System
+
 - Triggers warning if:
      -Disk usage > 80%
      -Memory usage > 70%
--Returns non-zero exit status for monitoring integration
+     
+- Returns non-zero exit status for monitoring integration
 
 ---
 
 🔹 Detailed Logging
-- Saves system diagnostics to system_info.log
+
+- Saves system diagnostics to `system_info.log`
 - Includes:
-- Full uptime details
-- Memory breakdown (free -h)
-- Disk usage (df -h)
-- Top processes snapshot (top)
+    - Full uptime details
+    - Memory breakdown (`free -h`)
+    - Disk usage (`df -h`)
+    - Top processes snapshot (`top`)
 
 ---  
 
 ## Technologies Used
+
 - Bash Scripting
-- Linux CLI Tools: hostname, uname, free, df, uptime, who, top
-- Text Processing: awk, sed
+- Linux CLI Tools: `hostname`, `uname`, `free`, `df`, `uptime`, `who`, `top`
+- Text Processing: `awk`, ``sed`
 
 ---
 
 ## How to Run
+
+```
     git clone <your-repo-link>
     cd <repo-name>
     chmod +x script.sh
     ./script.sh
+```
 
 ---
 
 ## Sample Output
+
 ------------------------------------------
 System Summary - Tue Mar 26
 ------------------------------------------
@@ -78,17 +86,19 @@ Disk Usage (/): 60%
 ## Log File
 
 Detailed logs are stored in:
-    system_info.log
+    `system_info.log`
 
 
 --- 
 
 ## Exit Codes
-    0 → System healthy
-    1 → Warning triggered (high memory/disk usage)
+
+    `0` → System healthy
+    `1` → Warning triggered (high memory/disk usage)
 
 
 ## Future Improvements
+
 - Add email/Slack alerts
 - Integrate with cron for scheduling
 - Add CPU usage threshold alerts

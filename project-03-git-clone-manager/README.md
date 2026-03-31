@@ -11,9 +11,9 @@ This project demonstrates practical Bash scripting skills commonly used in DevOp
 
 ## Features
 
-* Uses strict Bash mode (set -euo pipefail) for safer execution
+* Uses strict Bash mode (`set -euo pipefail`) for safer execution
 * Logs output to both terminal and file using tee
-* Provides cloning summary (cloned, skipped, failed)
+* Provides cloning summary (`cloned`, `skipped`, `failed`)
 * Validates Git installation before execution
 * Portable script (runs from any directory)
 * Clone multiple repositories automatically
@@ -42,7 +42,7 @@ project-03-git-clone-manager/
 ## Logging
 
 Logs are stored at:
-    -  repos/clone.log
+    -  `repos/clone.log`
 - Includes timestamps for all actions
 - Logs both successful and failed operations
 - Output is displayed in terminal and saved to file
@@ -56,7 +56,7 @@ The script handles:
 - Missing Git installation
 - Clone failures
 - Existing repositories
-- Script failures using strict mode (set -euo pipefail)
+- Script failures using strict mode (`set -euo pipefail`)
 
 ---
 

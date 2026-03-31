@@ -26,6 +26,7 @@ It simulates real-world DevOps workflows by filtering logs, identifying errors, 
 
 ## Project Structure
 
+```
 project-05-log-analyzer/
 │
 ├── log_analyzer.sh
@@ -35,6 +36,7 @@ project-05-log-analyzer/
 │   ├── filter.png
 │   └── help.png
 └── README.md
+```
 
 ---
 
@@ -95,15 +97,17 @@ project-05-log-analyzer/
 ---
 
 ## DevOps Concepts Used
+
 - Log analysis & debugging
-- Text processing (grep, awk, sort, uniq)
-- CLI argument parsing (getopts)
+- Text processing (`grep`, `awk`, `sort`, `uniq`)
+- CLI argument parsing (`getopts`)
 - Data filtering and summarization
 - Automation scripting
 
 ---
 
 ## Use Cases
+
 - Debug application errors
 - Analyze system logs
 - Identify recurring issues
