@@ -1,6 +1,8 @@
 # DevOps Bootcamp
 
-A structured, hands-on journey to becoming a **job-ready DevOps Engineer**, focused on real-world system automation, monitoring, and scripting using Linux and Bash.
+A structured, hands-on journey to becoming a **job-ready DevOps Engineer**, focused on building real-world automation, monitoring, and debugging tools using Linux and Bash.
+
+This repository emphasizes **production-style scripting, observability, and system reliability practices** used in modern DevOps environments.
 
 ---
 
@@ -28,11 +30,26 @@ Each project builds practical skills required in real production environments.
 ---
 
 ## Repository Structure
+
+```
 project-01-system-info/
 project-02-service-manager/
 project-03-git-clone-manager/
 project-04-server-monitor/
 project-05-log-analyzer/
+```
+---
+
+## 🔧 Key DevOps Concepts Demonstrated
+
+- Automation using Bash scripting
+- System monitoring and alerting
+- Log analysis and debugging
+- Service management with systemd
+- Observability (logging, metrics)
+- Idempotent scripting practices
+- Cron-based job scheduling
+- Error handling and script reliability
 
 ---
 
@@ -42,14 +59,18 @@ project-05-log-analyzer/
 
 ### 🔹 Project 01: System Info Script
 
+[View Project](./project-01-system-info)
+
 A simple Bash script to display system information.
 
 **Features:**
+
 - OS details
 - CPU and memory info
 - Uptime tracking
 
 **Skills:**
+
 - Basic scripting
 - Linux commands
 
@@ -57,15 +78,19 @@ A simple Bash script to display system information.
 
 ### 🔹 Project 02: Service Manager
 
+[View Project](./project-02-service-manager)
+
 A CLI tool to manage system services using `systemctl`.
 
 **Features:**
+
 - Start / Stop / Restart / Status
 - Argument parsing
 - Case-insensitive input
 - Logging with timestamps
 
 **Skills:**
+
 - Functions
 - Exit codes
 - Service management
@@ -74,9 +99,12 @@ A CLI tool to manage system services using `systemctl`.
 
 ### 🔹 Project 03: Git Clone Manager
 
+[View Project](./project-03-git-clone-manager)
+
 Automates cloning multiple repositories efficiently.
 
 **Features:**
+
 - Clone multiple repos
 - Skip already cloned repos
 - Logging system
@@ -84,6 +112,7 @@ Automates cloning multiple repositories efficiently.
 - Safe scripting (`set -euo pipefail`)
 
 **Skills:**
+
 - Arrays and loops
 - Idempotency
 - Automation design
@@ -92,9 +121,12 @@ Automates cloning multiple repositories efficiently.
 
 ### ⭐ Project 04: Server Health Monitor (Featured)
 
+[View Project](./project-04-server-monitor)
+
 A production-style monitoring script that tracks system health.
 
 **Features:**
+
 - CPU, Memory, Disk monitoring
 - System uptime
 - Top processes tracking
@@ -105,17 +137,21 @@ A production-style monitoring script that tracks system health.
 - Enhanced output formatting
 
 **Skills:**
+
 - System monitoring tools (`ps`, `top`, `df`, `free`)
 - Logging strategies
 - Observability basics
 
 ---
 
-### ⭐ Project 05: Log Analyzer
+### ⭐ Project 05: Log Analyzer (Featured)
+
+[View Project](./project-05-log-analyzer)
 
 A practical log analysis tool built using Bash to simulate real-world debugging and troubleshooting workflows.
 
 **Features:**
+
 - Analyze log files for insights
 - Count INFO, WARN, and ERROR entries
 - Display recent error logs
@@ -124,6 +160,7 @@ A practical log analysis tool built using Bash to simulate real-world debugging 
 - Date-based log filtering
 
 **Skills:**
+
 - Log parsing using `grep`, `awk`, `sort`, `uniq`
 - Data extraction and summarization
 - Debugging real-world issues
@@ -167,6 +204,14 @@ A practical log analysis tool built using Bash to simulate real-world debugging 
 
 ---
 
+## Currently Working On
+
+- CI/CD pipeline implementation (GitHub Actions)
+- Containerization using Docker
+- Enhancing existing scripts with production-grade features
+
+---
+
 ## Note
 
 This repository is actively being improved to reflect **real DevOps practices** and production-level scripting standards.
@@ -176,4 +221,5 @@ This repository is actively being improved to reflect **real DevOps practices** 
 ## Author
 
 **Yasmin Ara Islam**  
-DevOps Learner | Future Cloud Engineer
+
+DevOps Learner | Aspiring DevOps & Cloud Engineer
