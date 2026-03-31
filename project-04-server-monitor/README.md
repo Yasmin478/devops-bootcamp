@@ -1,4 +1,4 @@
-# 🖥️ Project 04: Server Health Monitor
+# Project 04: Server Health Monitor
 
 ## Overview
 
@@ -31,13 +31,12 @@ project-04-server-monitor/
 ├── monitor.sh
 ├── config.conf
 ├── logs/
-│ └── system.log
+│   └── system.log
 ├── screenshots/
-│ ├── Normal.png
-│ ├── Alert.png
-│ └── Sigint.png
+│   ├── Normal.png
+│   ├── Alert.png
+│   └── Sigint.png
 └── README.md
-
 
 ---
 
@@ -45,9 +44,9 @@ project-04-server-monitor/
 
 All thresholds and log settings are defined in:
 
-config.conf
+`config.conf`
 
-Example:
+- Example:
 
 ```bash
 CPU_THRESHOLD=80
@@ -57,9 +56,13 @@ DISK_THRESHOLD=90
 MAX_LOG_SIZE=1000000
 MAX_LOG_FILES=5
 
+```
+
+---
+
 ## How It Works
 
-1. The script loads configuration from config.conf
+1. The script loads configuration from `config.conf`
 
 2. Collects system metrics using:
       - top → CPU usage
@@ -69,29 +72,43 @@ MAX_LOG_FILES=5
       - ps → process monitoring
 
 3. Outputs:
-- Clean formatted report in terminal
-- Structured logs with timestamps
+      - Clean formatted report in terminal
+      - Structured logging with timestamps and levels (INFO, WARN, ERROR)
+      - Logs written to both console and file using tee
 
 4. Performs:
-- Log rotation when file exceeds size limit
-- Alerting when thresholds are crossed
+      - Automatic log rotation based on size limits
+      - Alerting when thresholds are crossed
 
 5. Handles interruptions using signal traps
 
+---
+
+## Exit Behavior
+
+- Script exits immediately on errors (`set -euo pipefail`)
+- Ensures reliability in automated environments (cron, pipelines)
+
+---
 
 ## Usage
-1. Make script executable
-chmod +x monitor.sh
-2. Run normally
-./monitor.sh
-3. Run in silent mode (for cron)
-./monitor.sh --no-output
 
+1. Make script executable
+```chmod +x monitor.sh```
+2. Run normally
+```./monitor.sh```
+3. Run in silent mode (for cron)
+```./monitor.sh --no-output```
+
+---
 
 ## Sample Output
+
 - Normal Execution
 - Alert Trigger
 - Interrupted Execution (SIGINT)
+
+---
 
 ## Logging
 
@@ -105,23 +122,33 @@ Each log entry includes:
 - System metrics
 - Alerts (if triggered)
 
+---
 
 ## Log Rotation
+
 - Automatically rotates logs when size exceeds limit
 - Maintains a fixed number of log files
 - Prevents uncontrolled log growth
 
+---
 
 ## Automation with Cron
 
+- Designed to be used with cron jobs for automation : 
+
 Run every 5 minutes:
+```
    crontab -e
+```
 Add:
-
+```
    */5 * * * * /bin/bash /home/yasmin/devops-bootcamp/project-04-server-monitor/monitor.sh --no-output
+```
 
+---
 
 ## DevOps Concepts Used
+
 - System monitoring
 - Bash automation
 - Logging and observability
@@ -132,23 +159,42 @@ Add:
 - Error handling (set -euo pipefail)
 - Signal handling (SIGINT, SIGTERM)
 
+---
 
 ## Debugging & Fixes
+
 - Fixed unbound variable issues (set -u)
 - Corrected log rotation variable handling
 - Resolved duplicate process header issue
 - Improved cross-platform compatibility for stat
 - Enhanced output formatting
 
+---
+
+## Why This Project Matters
+
+This project simulates a real-world server monitoring system used in DevOps and SRE roles.
+
+It demonstrates:
+- Observability practices (logging, alerts)
+- Reliability engineering (error handling, strict mode)
+- Automation readiness (cron-compatible design)
+- Production-grade scripting patterns
+
+---
+
 ## Future Improvements
+
 - Email/Slack alert integration
 - Centralized logging (ELK stack)
 - Systemd service integration
 - Historical metrics tracking
 - Dashboard visualization (Grafana)
 
+---
 
 ## Author
 
-Yasmin Ara Islam
-DevOps Bootcamp Project 🚀
+**Yasmin Ara Islam**
+
+DevOps Bootcamp Project
