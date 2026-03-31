@@ -50,7 +50,7 @@ This project is part of my DevOps learning journey, focusing on system monitorin
 
 - Bash Scripting
 - Linux CLI Tools: `hostname`, `uname`, `free`, `df`, `uptime`, `who`, `top`
-- Text Processing: `awk`, ``sed`
+- Text Processing: `awk`, `sed`
 
 ---
 
