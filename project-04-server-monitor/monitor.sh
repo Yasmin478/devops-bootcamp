@@ -1,15 +1,17 @@
 #!/bin/bash
 set -euo pipefail
-trap 'log "ERROR" "Script interrupted!"' SIGINT SIGTERM
 
-if [[ "${1:-}" == "--no-output" ]]; then
-    SILENT=true
-else
-    SILENT=false
-fi
+
+LOG_DIR="./logs"
+LOG_FILE="$LOG_DIR/system.log"
+
+
+mkdir -p "$LOG_DIR"
+
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_FILE="$SCRIPT_DIR/config.conf"
+
 
 if [[ -f "$CONFIG_FILE" ]]; then
     source "$CONFIG_FILE"
@@ -19,11 +21,12 @@ else
 fi
 
 
-LOG_DIR="./logs"
-LOG_FILE="$LOG_DIR/system.log"
+if [[ "${1:-}" == "--no-output" ]]; then
+    SILENT=true
+else
+    SILENT=false
+fi
 
-
-mkdir -p "$LOG_DIR"
 
 timestamp(){
 	date "+%Y-%m-%d %H:%M:%S"
@@ -34,8 +37,18 @@ log() {
     shift
     local message="$*"
 
-    echo "$(timestamp) [$level] $message" | tee -a "$LOG_FILE"
+	if [[ "$SILENT" == true ]]; then
+   		echo "$(timestamp) [$level] $message" >> "$LOG_FILE"
+	else
+    	echo "$(timestamp) [$level] $message" | tee -a "$LOG_FILE"
+	fi
 }
+
+
+trap 'log "ERROR" "Script interrupted!"' SIGINT SIGTERM
+
+
+
 
 #------Log rotation
 
