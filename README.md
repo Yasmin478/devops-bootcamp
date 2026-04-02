@@ -37,6 +37,7 @@ project-02-service-manager/
 project-03-git-clone-manager/
 project-04-server-monitor/
 project-05-log-analyzer/
+project-06-backup-automation
 ```
 ---
 
@@ -165,6 +166,22 @@ A practical log analysis tool built using Bash to simulate real-world debugging 
 - Data extraction and summarization
 - Debugging real-world issues
 - Script flexibility with arguments
+
+---
+
+## ⭐ Project 06: Backup Automation (In Progress)
+
+A production-style backup system built using Bash.
+
+**Current Features:**
+- Directory backup
+- Compression (tar.gz)
+- Timestamp-based naming
+
+**Upcoming:**
+- Logging system
+- Retention policy
+- Automation using cron
 
 ---
 
