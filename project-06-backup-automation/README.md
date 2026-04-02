@@ -1,4 +1,4 @@
-# Project 06: Bash Automation
+# Project 06: Backup Automation
 
 ## Description
 
