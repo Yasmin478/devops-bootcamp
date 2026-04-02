@@ -1,2 +1,11 @@
+# Logs
 *.log
+
+# Backup files
+*.tar.gz
+
+# Backup directories
+backups/
+
+# Clone of repositories
 repos/
