@@ -9,6 +9,7 @@ A bash script to create compressed backups of directories
 - Backup any directory
 - Compression using tar.gz
 - Timestamp-based backup naming (no overwrite)
+- Logging system with `INFO` and `ERROR` levels
 
 ## Usage
 
