@@ -37,6 +37,6 @@ BACKUP_FILE="$BACKUP_DIR/${BASENAME}_${TIMESTAMP}.tar.gz"
 
 log "INFO" "Starting backup for $SOURCE_DIR"
 
-tar -czf "$BACKUP_FILE" "$SOURCE_DIR"
+tar -czf "$BACKUP_FILE" -C "$(dirname "$SOURCE_DIR")" "$(basename "$SOURCE_DIR")"
 
 log "INFO" "Backup created successfully: $BACKUP_FILE"
