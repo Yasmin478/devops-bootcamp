@@ -15,7 +15,8 @@ mkdir -p "$BACKUP_DIR"
 
 log() {
     local level="$1"
-    local message="$2"
+    shift
+    local message="$*"
     local timestamp
 
     timestamp=$(date +"%Y-%m-%d %H:%M:%S")
