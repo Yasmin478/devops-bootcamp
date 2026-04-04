@@ -1,11 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-LOG_DIR="./logs"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOG_DIR="$SCRIPT_DIR/logs"
 LOG_FILE="$LOG_DIR/backup.log"
 
 SOURCE_DIR="${1:-}"
-BACKUP_DIR="./backups"
+BACKUP_DIR="$SCRIPT_DIR/backups"
+
+MAX_BACKUPS=5
 
 mkdir -p "$LOG_DIR"
 mkdir -p "$BACKUP_DIR"
@@ -40,3 +43,18 @@ log "INFO" "Starting backup for $SOURCE_DIR"
 tar -czf "$BACKUP_FILE" -C "$(dirname "$SOURCE_DIR")" "$(basename "$SOURCE_DIR")"
 
 log "INFO" "Backup created successfully: $BACKUP_FILE"
+
+#----Retention policy----
+
+log "INFO" "Applying retention policy (keeping last $MAX_BACKUPS backups)"
+
+OLD_BACKUPS=$(ls -t "$BACKUP_DIR"/*.tar.gz 2>/dev/null | tail -n +$((MAX_BACKUPS + 1)))
+
+if [[ -n "$OLD_BACKUPS" ]]; then
+    echo "$OLD_BACKUPS" | while read -r file; do
+        rm -f "$file"
+        log "INFO" "Deleted old backup: $file"
+    done
+else
+    log "INFO" "No old backups to delete"
+fi
