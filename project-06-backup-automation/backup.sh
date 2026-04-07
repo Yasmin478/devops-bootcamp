@@ -2,13 +2,17 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LOG_DIR="$SCRIPT_DIR/logs"
-LOG_FILE="$LOG_DIR/backup.log"
 
 SOURCE_DIR="${1:-}"
-BACKUP_DIR="$SCRIPT_DIR/backups"
 
-MAX_BACKUPS=5
+CONFIG_FILE="$SCRIPT_DIR/config.conf"
+
+if [[ -f "$CONFIG_FILE" ]]; then
+    source "$CONFIG_FILE"
+else
+    echo "Config file not found!"
+    exit 1
+fi
 
 mkdir -p "$LOG_DIR"
 mkdir -p "$BACKUP_DIR"
@@ -27,6 +31,7 @@ log() {
 #----Validate input----
 if [[ -z "$SOURCE_DIR" ]]; then
     log "ERROR" "No directory provided"
+    echo "Usage: $0 <directory_to_backup>"
     exit 1
 fi
 
