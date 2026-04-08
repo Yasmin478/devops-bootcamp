@@ -169,25 +169,36 @@ A practical log analysis tool built using Bash to simulate real-world debugging 
 
 ---
 
-## ⭐ Project 06: Backup Automation (In Progress)
+## ⭐ Project 06: Backup Automation System (Production-Style)
 
-A production-style backup system built using Bash.
+[View Project](./project-06-backup-automation)
 
-**Current Features:**
-- Directory backup
-- Compression (tar.gz)
-- Timestamp-based naming
+A fully automated backup solution simulating real-world DevOps workflows with logging, retention, and scheduling.
 
-**Upcoming:**
-- Logging system
-- Retention policy
-- Automation using cron
+**Features:**
+
+- Directory backup with tar.gz compression
+- Timestamp-based file naming (prevents overwrite)
+- Logging system with levels (`INFO`, `ERROR`)
+- Retention policy (auto-delete old backups)
+- Config file support (`config.conf`)
+- Portable script using `SCRIPT_DIR`
+- Cron-based scheduling for automation
+
+**Key Concepts:**
+
+- File system automation
+- Observability (logging)
+- Safe scripting (set -euo pipefail)
+- Retention strategies
+- Config-driven design
+- Cron job scheduling
 
 ---
 
 ## Current Progress
 
--  5 Projects Completed
+-  6 Projects Completed
 -  Building real-world debugging and log analysis skills
 -  Enhancing scripts to production-level quality
 -  Preparing for CI/CD and containerization
@@ -215,7 +226,6 @@ A production-style backup system built using Bash.
 
 ## Future Projects
 
-- Backup Automation
 - CI/CD Pipeline
 - Dockerized Applications
 
@@ -223,7 +233,8 @@ A production-style backup system built using Bash.
 
 ## Currently Working On
 
-- CI/CD pipeline implementation (GitHub Actions)
+- Networking fundamentals (DNS, HTTP/HTTPS, APIs)
+- Preparing for CI/CD pipelines (GitHub Actions)
 - Containerization using Docker
 - Enhancing existing scripts with production-grade features
 
