@@ -18,7 +18,8 @@ A simple CLI tool to fetch weather information using an API.
 
 ## Usage
 
-```./weather.sh
+```
+./weather.sh
 ```
 
 ---
