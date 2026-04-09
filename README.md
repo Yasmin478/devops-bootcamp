@@ -37,7 +37,8 @@ project-02-service-manager/
 project-03-git-clone-manager/
 project-04-server-monitor/
 project-05-log-analyzer/
-project-06-backup-automation
+project-06-backup-automation/
+project-07-weather-cli-tool/
 ```
 ---
 
@@ -169,7 +170,7 @@ A practical log analysis tool built using Bash to simulate real-world debugging 
 
 ---
 
-## ⭐ Project 06: Backup Automation System (Production-Style)
+## ⭐ Project 06: Backup Automation System (Production-Style) (Featured)
 
 [View Project](./project-06-backup-automation)
 
@@ -196,6 +197,21 @@ A production-ready backup automation system that simulates real-world DevOps wor
 - Idempotent backup handling
 - Config-driven design
 - Cron job scheduling
+
+---
+
+## ⭐ Project 07: Weather CLI Tool
+
+[View Project](./project-07-weather-cli-tool)
+
+A CLI-based tool that fetches real-time weather data using an API.
+
+**Key Concepts:**
+
+- API integration (`wttr.in`)
+- curl usage
+- CLI argument handling
+- text processing (`awk`)
 
 ---
 
