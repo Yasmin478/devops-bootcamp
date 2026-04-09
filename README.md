@@ -173,24 +173,27 @@ A practical log analysis tool built using Bash to simulate real-world debugging 
 
 [View Project](./project-06-backup-automation)
 
-A fully automated backup solution simulating real-world DevOps workflows with logging, retention, and scheduling.
+A production-ready backup automation system that simulates real-world DevOps workflows with logging, retention, and scheduling.
 
 **Features:**
 
 - Directory backup with tar.gz compression
 - Timestamp-based file naming (prevents overwrite)
 - Logging system with levels (`INFO`, `ERROR`)
-- Retention policy (auto-delete old backups)
+- Retention policy (automatically retains latest backups and deletes older ones)
+- Input validation for safe backup operations
 - Config file support (`config.conf`)
 - Portable script using `SCRIPT_DIR`
 - Cron-based scheduling for automation
+
 
 **Key Concepts:**
 
 - File system automation
 - Observability (logging)
-- Safe scripting (set -euo pipefail)
+- Safe scripting (`set -euo pipefail`)
 - Retention strategies
+- Idempotent backup handling
 - Config-driven design
 - Cron job scheduling
 
