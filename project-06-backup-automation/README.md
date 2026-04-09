@@ -1,8 +1,8 @@
 # Project 06: Backup Automation System
 
-## Description
+## Overview
 
-A production-style Bash script to automate directory backups with compression, logging, retention policy, and scheduling support.
+A production-ready Bash automation script p to automate directory backups with compression, logging, retention policy, and scheduling support.
 
 This project demonstrates real-world DevOps practices such as automation, observability, and configuration-driven scripting.
 
@@ -10,22 +10,22 @@ This project demonstrates real-world DevOps practices such as automation, observ
 
 ## Features
 
-* Backup any directory
-* Compression using `tar.gz`
-* Timestamp-based backup naming (prevents overwrite)
-* Logging system with levels (`INFO`, `ERROR`)
-* Retention policy (automatically deletes old backups)
-* Config file support (`config.conf`)
-* Portable paths using `SCRIPT_DIR`
-* Cron-based automation support
+- Backup any directory
+- Compression using `tar.gz`
+- Timestamp-based backup naming (prevents overwrite)
+- Logging system with levels (`INFO`, `ERROR`)
+- Retention policy (automatically deletes old backups)
+- Config file support (`config.conf`)
+- Portable paths using `SCRIPT_DIR`
+- Cron-based automation support
 
 ---
 
 ## Tech Stack
 
-* Bash Scripting
-* Linux Commands (`tar`, `ls`, `rm`, `cron`)
-* File System Management
+- Bash Scripting
+- Linux Commands (`tar`, `ls`, `rm`, `cron`)
+- File System Management
 
 ---
 
@@ -37,9 +37,24 @@ project-06-backup-automation/
 ├── backup.sh
 ├── config.conf
 ├── backups/
+│   └── *.tar.gz
 ├── logs/
+│   └── backup.log
 └── README.md
 ```
+
+---
+
+## Why This Project Matters
+
+This project simulates real-world backup automation used in production systems.
+
+It demonstrates:
+- Data protection strategies
+- Automated maintenance (retention policy)
+- Observability through logging
+- Cron-based scheduling for reliability
+- Idempotent behavior by avoiding duplicate or overwritten backups
 
 ---
 
@@ -48,11 +63,16 @@ project-06-backup-automation/
 Edit the `config.conf` file:
 
 ```
+BACKUP_DIR=/path/to/backups
+LOG_DIR=/path/to/logs
+LOG_FILE=$LOG_DIR/backup.log
 MAX_BACKUPS=3
 ```
 
-* `MAX_BACKUPS` → Number of latest backups to retain
-* Older backups are automatically deleted
+- `BACKUP_DIR` → where backups are stored  
+- `LOG_DIR` → directory for logs  
+- `LOG_FILE` → log file path  
+- `MAX_BACKUPS` → number of backups to retain
 
 ---
 
@@ -79,10 +99,22 @@ MAX_BACKUPS=3
 3. Stores backup with timestamp
 4. Logs all operations
 5. Applies retention policy to delete old backups
+6. Ensures only the latest backups are retained based on configuration
+---
+
+## Error Handling
+
+- Uses strict mode (`set -euo pipefail`) for safe execution
+- Validates input directory
+- Handles missing configuration
+- Logs all failures with ERROR level
 
 ---
 
 ## Logging
+
+- Structured logging with timestamps and levels (`INFO`, `ERROR`)
+- Logs written to both console and file
 
 Logs are stored in:
 
@@ -102,12 +134,20 @@ Example:
 
 ## Retention Policy
 
-* Keeps only the latest `N` backups
-* Automatically deletes older backups
+- Backups are sorted by newest first
+- Only the latest `N` backups are retained
+- Older backups are automatically deleted
 
 Example:
 
 If `MAX_BACKUPS=3` → only latest 3 backups are retained
+
+---
+
+## Exit Codes
+
+- `0` → Success  
+- `1` → General error (invalid input, config missing)
 
 ---
 
