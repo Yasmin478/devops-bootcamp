@@ -14,16 +14,16 @@ done
 
 #--Fetching weather data
 if [[ -z "$LOCATION" ]]; then
-    weather=$(curl -s wttr.in?format=3)
+    response=$(curl -s wttr.in?format=3)
 else
-    weather=$(curl -s "wttr.in/$LOCATION?format=3")
+    response=$(curl -s "wttr.in/$LOCATION?format=3")
 fi
 
 #--Output
 if [[ "$TEMP_ONLY" == true ]]; then
-    echo "$weather" | awk '{printf $NF}'
+    echo "Temperature: $(echo "$response" | awk '{print $NF}')"
 else
     echo "Current Weather:"
-    echo "$weather"
+    echo "$response"
 fi
 
