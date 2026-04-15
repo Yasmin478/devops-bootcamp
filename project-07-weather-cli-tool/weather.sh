@@ -1,15 +1,35 @@
 #!/bin/bash
+set -euo pipefail
 
 LOCATION=""
 TEMP_ONLY=false
 
 #--Parsing command-line arguments
-for arg in "$@"; do 
-    if [[ "$arg" == "--temp" ]]; then
-        TEMP_ONLY=true
-    else
-        LOCATION="$arg"
-    fi
+for arg in "$@"; do
+    case "$arg" in
+        --temp)
+
+            TEMP_ONLY=true
+            ;;
+
+        --help)
+                echo "Usage: $0 [LOCATION] [OPTIONS]"
+                echo ""
+                echo "Fetch current weather information."
+                echo ""
+                echo "Arguments:"
+                echo "LOCATION:         Optional city name (e.g., delhi, london)"
+                echo ""
+                echo "OPTIONS:"
+                echo "  --temp          Show only temperature"
+                echo "  --help          Show this help message"
+                exit 0
+                ;;
+
+        *)
+            LOCATION="$arg"
+            ;;
+    esac
 done
 
 #--Fetching weather data
