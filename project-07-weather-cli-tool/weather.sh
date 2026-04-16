@@ -39,6 +39,12 @@ else
     response=$(curl -s "wttr.in/$LOCATION?format=3")
 fi
 
+#--Error Handling
+if echo "$response" | grep -Eqi "unknown location|location not found|error"; then
+    echo "Error: Invalid location '$LOCATION'"
+    exit 1
+fi
+
 #--Output
 if [[ "$TEMP_ONLY" == true ]]; then
     echo "Temperature: $(echo "$response" | awk '{print $NF}')"
