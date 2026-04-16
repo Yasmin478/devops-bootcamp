@@ -34,8 +34,12 @@ done
 
 #--Fetching weather data
 if [[ -z "$LOCATION" ]]; then
-    echo "Using current location..."
     response=$(curl -s wttr.in?format=3)
+
+    # Extract location (text before :)
+    current_location=$(echo "$response" | awk -F: '{print $1}')
+
+    echo "Using current location: $current_location"
 else
     response=$(curl -s "wttr.in/$LOCATION?format=3")
 fi
