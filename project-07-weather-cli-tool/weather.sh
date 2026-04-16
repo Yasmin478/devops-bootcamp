@@ -34,6 +34,7 @@ done
 
 #--Fetching weather data
 if [[ -z "$LOCATION" ]]; then
+    echo "Using current location..."
     response=$(curl -s wttr.in?format=3)
 else
     response=$(curl -s "wttr.in/$LOCATION?format=3")
@@ -42,7 +43,7 @@ fi
 #--Error Handling
 if echo "$response" | grep -Eqi "unknown location|location not found|error"; then
     echo "Error: Invalid location '$LOCATION'"
-    exit 1
+    exit 1                                       #--user input error
 fi
 
 #--Output
