@@ -6,7 +6,7 @@ TEMP_ONLY=false
 
 #--Parsing command-line arguments
 for arg in "$@"; do
-    case "$arg" in
+    case "${arg,,}" in
         --temp)
 
             TEMP_ONLY=true
