@@ -19,6 +19,15 @@ Each project builds practical skills required in real production environments.
 
 ---
 
+## Highlights
+
+- 7 real-world DevOps projects completed
+- Production-style Bash scripting
+- Strong focus on observability and automation
+- Hands-on experience with real debugging scenarios
+
+---
+
 ## Tech Stack
 
 - Linux
@@ -170,7 +179,7 @@ A practical log analysis tool built using Bash to simulate real-world debugging 
 
 ---
 
-## ⭐ Project 06: Backup Automation System (Production-Style) (Featured)
+### ⭐ Project 06: Backup Automation System (Production-Style) (Advanced)
 
 [View Project](./project-06-backup-automation)
 
@@ -188,7 +197,7 @@ A production-ready backup automation system that simulates real-world DevOps wor
 - Cron-based scheduling for automation
 
 
-**Key Concepts:**
+**Skills:**
 
 - File system automation
 - Observability (logging)
@@ -200,25 +209,35 @@ A production-ready backup automation system that simulates real-world DevOps wor
 
 ---
 
-## ⭐ Project 07: Weather CLI Tool
+## ⭐ Project 07: Weather CLI Tool (API-based CLI)
 
 [View Project](./project-07-weather-cli-tool)
 
-A CLI-based tool that fetches real-time weather data using an API.
+A production-style CLI tool that fetches real-time weather data using an external API.
 
-**Key Concepts:**
+**Features:**
 
-- API integration (`wttr.in`)
-- curl usage
-- CLI argument handling
-- text processing (`awk`)
+* Fetch weather for any location
+* Temperature-only mode (`--temp`)
+* Case-insensitive argument handling
+* Built-in help menu (`--help`)
+* Error handling for invalid locations
+* Automatic detection of current location
+* Clean and user-friendly CLI output
+
+**Skills:**
+
+* API integration (`curl`)
+* CLI design using `case` statements
+* Text processing (`awk`, `grep`)
+* Error handling and validation
 
 ---
 
 ## Current Progress
 
--  6 Projects Completed
--  Building real-world debugging and log analysis skills
+-  7 Projects Completed
+-  Strengthening real-world debugging and log analysis skills
 -  Enhancing scripts to production-level quality
 -  Preparing for CI/CD and containerization
 
@@ -252,7 +271,7 @@ A CLI-based tool that fetches real-time weather data using an API.
 
 ## Currently Working On
 
-- Networking fundamentals (DNS, HTTP/HTTPS, APIs)
+- Networking fundamentals (DNS, HTTP/HTTPS, request lifecycle)
 - Preparing for CI/CD pipelines (GitHub Actions)
 - Containerization using Docker
 - Enhancing existing scripts with production-grade features
