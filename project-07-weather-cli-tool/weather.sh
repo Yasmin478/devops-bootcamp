@@ -38,7 +38,7 @@ fi
 API_URL="https://wttr.in/${LOCATION}?format=j1"
 
 #--Fetching weather data (with status code)
-response=$(curl -s -w "\n%{http_code}" "$API_URL")
+response=$(curl -sS -w "\n%{http_code}" "$API_URL")
 
 body=$(echo "$response" | head -n -1)
 status=$(echo "$response" | tail -n1)
