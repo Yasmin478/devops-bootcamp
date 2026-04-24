@@ -4,6 +4,28 @@ set -euo pipefail
 LOCATION=""
 TEMP_ONLY=false
 
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+NC="\033[0m" 
+
+#--Spinner function for loading animation
+
+spinner() {
+    local pid=$!
+    local delay=0.1
+    local spinstr='|/-\'
+
+    while ps -p $pid > /dev/null 2>&1; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
+
 #--Parsing command-line arguments
 for arg in "$@"; do
     case "${arg,,}" in
@@ -16,11 +38,11 @@ for arg in "$@"; do
             echo "Fetch current weather information."
             echo ""
             echo "Arguments:"
-            echo "LOCATION:         Optional city name (e.g., delhi, london)"
+            echo "LOCATION: Optional city name (e.g., delhi, london)"
             echo ""
             echo "OPTIONS:"
-            echo "  --temp          Show only temperature"
-            echo "  --help          Show this help message"
+            echo "  --temp   Show only temperature"
+            echo "  --help   Show this help message"
             exit 0
             ;;
         *)
@@ -31,31 +53,51 @@ done
 
 #--Default location
 if [[ -z "$LOCATION" ]]; then
-    LOCATION=""
-    echo "Using current location..."
+    echo -e "${YELLOW}Using current location...${NC}"
 fi
 
 API_URL="https://wttr.in/${LOCATION}?format=j1"
 
-#--Fetching weather data (with status code)
-response=$(curl -sS -w "\n%{http_code}" "$API_URL")
+#--Fetching weather data
+echo -e "${YELLOW}Fetching weather...${NC}"
+
+curl -sS -w "\n%{http_code}" "$API_URL" > /tmp/weather_response &
+
+spinner
+
+sleep 0.2
+
+response=$(cat /tmp/weather_response)
+rm -f /tmp/weather_response
 
 body=$(echo "$response" | head -n -1)
 status=$(echo "$response" | tail -n1)
 
-#--HTTP Error Handling
-if [[ "$status" -ne 200 ]]; then
-    echo "Error: API request failed with status $status"
+#--Check if response is valid JSON
+if ! echo "$body" | jq empty >/dev/null 2>&1; then
+    echo -e "${RED}Error: Invalid response from API (possibly invalid location)${NC}"
     exit 1
 fi
 
-#--Check for invalid location using JSON
+#--Check for invalid location inside JSON
 if echo "$body" | jq -e '.nearest_area == null' >/dev/null 2>&1; then
-    echo "Error: Invalid location '$LOCATION'"
+    echo -e "${RED}Error: Invalid location '$LOCATION'${NC}"
     exit 1
 fi
 
-#--Extract data using jq
+#--HTTP Error Handling (after JSON validation)
+if [[ "$status" -ne 200 ]]; then
+    echo -e "${RED}Error: API request failed with status $status${NC}"
+    exit 1
+fi
+
+#--Check for invalid location (extra safety)
+if echo "$body" | jq -e '.nearest_area == null' >/dev/null 2>&1; then
+    echo -e "${RED}Error: Invalid location '$LOCATION'${NC}"
+    exit 1
+fi
+
+#--Extract data
 temp=$(echo "$body" | jq -r '.current_condition[0].temp_C')
 weather=$(echo "$body" | jq -r '.current_condition[0].weatherDesc[0].value')
 humidity=$(echo "$body" | jq -r '.current_condition[0].humidity')
@@ -67,7 +109,7 @@ country=$(echo "$body" | jq -r '.nearest_area[0].country[0].value')
 if [[ "$TEMP_ONLY" == true ]]; then
     echo "Temperature in $city: ${temp}°C"
 else
-    echo "🌦️ Weather Report"
+    echo -e "${GREEN}🌦️  Weather Report${NC}"
     echo "----------------------"
     echo "City: $city, $region, $country"
     echo "Temperature: ${temp}°C"
