@@ -73,25 +73,18 @@ rm -f /tmp/weather_response
 body=$(echo "$response" | head -n -1)
 status=$(echo "$response" | tail -n1)
 
+#--HTTP Error Handling
+if [[ "$status" -ne 200 ]]; then
+    echo -e "${RED}Error: API request failed with status $status${NC}"
+    exit 1
+fi
 #--Check if response is valid JSON
 if ! echo "$body" | jq empty >/dev/null 2>&1; then
     echo -e "${RED}Error: Invalid response from API (possibly invalid location)${NC}"
     exit 1
 fi
 
-#--Check for invalid location inside JSON
-if echo "$body" | jq -e '.nearest_area == null' >/dev/null 2>&1; then
-    echo -e "${RED}Error: Invalid location '$LOCATION'${NC}"
-    exit 1
-fi
-
-#--HTTP Error Handling (after JSON validation)
-if [[ "$status" -ne 200 ]]; then
-    echo -e "${RED}Error: API request failed with status $status${NC}"
-    exit 1
-fi
-
-#--Check for invalid location (extra safety)
+#--Check for invalid location
 if echo "$body" | jq -e '.nearest_area == null' >/dev/null 2>&1; then
     echo -e "${RED}Error: Invalid location '$LOCATION'${NC}"
     exit 1
