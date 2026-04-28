@@ -2,7 +2,7 @@
 
 ## Overview
 
-A CLI-based Bash tool to fetch real-time weather information using an external API.
+> A production-style CLI tool built with Bash, focusing on reliability, error handling, and real-world API interaction.
 
 This project demonstrates real-world DevOps practices such as API integration, CLI design, input handling, and error management.
 
@@ -14,16 +14,20 @@ This project demonstrates real-world DevOps practices such as API integration, C
 * Temperature-only mode (`--temp`)
 * Case-insensitive argument handling
 * Built-in help menu (`--help`)
-* Error handling for invalid locations
 * Automatic detection of current location
-* Clean and user-friendly CLI output
+* Clean and user-friendly CLI output with colors
+* Spinner-based loading indicator
+* JSON parsing using `jq`
+* HTTP status handling
+* Retry mechanism for handling temporary API failures
+* Robust error handling for invalid locations and API issues
 
 ---
 
 ## Tech Stack
 
 * Bash Scripting
-* Linux Commands (`curl`, `awk`, `grep`)
+* Linux Commands (`curl`, `jq`)
 * API Integration (wttr.in)
 
 ---
@@ -98,19 +102,36 @@ It demonstrates:
 ## How It Works
 
 1. Parses command-line arguments using `case`
-2. Fetches weather data using `curl`
-3. Processes response using `awk`
-4. Displays formatted output
-5. Handles invalid inputs using pattern matching
+2. Sends API request using `curl`
+3. Implements retry logic for transient failures
+4. Validates HTTP response status
+5. Verifies JSON response using `jq`
+6. Extracts required fields from JSON
+7. Displays formatted output with colors
+8. Handles invalid locations and errors gracefully
 
 ---
 
 ## Error Handling
 
 * Uses strict mode (`set -euo pipefail`) for safe execution
+* Implements retry mechanism for transient API/network failures
+* Validates HTTP response status before processing
+* Ensures response is valid JSON using `jq`
 * Detects invalid locations from API response
 * Prevents misleading output on failure
 * Exits with appropriate error codes
+
+---
+
+## Retry Logic
+
+To improve reliability, the script retries API requests in case of temporary failures.
+
+- Maximum retries: 3  
+- Delay between retries: 2 seconds  
+
+This ensures the tool remains functional even during brief network issues or API instability.
 
 ---
 
@@ -124,8 +145,14 @@ It demonstrates:
 ## Sample Output
 
 ```
-Using current location: guwahati
-Temperature: +29°C
+Fetching weather...
+
+🌦️  Weather Report
+----------------------
+City: Guwahati, Assam, India
+Temperature: 29°C
+Condition: Partly cloudy
+Humidity: 78%
 ```
 
 ---
@@ -147,6 +174,7 @@ Temperature: +29°C
 * Add JSON output format
 * Add optional logging flag
 * Improve output formatting with colors
+* Containerize the application using Docker
 
 ---
 
