@@ -21,7 +21,7 @@ Each project builds practical skills required in real production environments.
 
 ## Highlights
 
-- 7 real-world DevOps projects completed
+- 7 real-world DevOps projects completed (including API-based CLI tools)
 - Production-style Bash scripting
 - Strong focus on observability and automation
 - Hands-on experience with real debugging scenarios
@@ -221,16 +221,21 @@ A production-style CLI tool that fetches real-time weather data using an externa
 * Temperature-only mode (`--temp`)
 * Case-insensitive argument handling
 * Built-in help menu (`--help`)
-* Error handling for invalid locations
 * Automatic detection of current location
-* Clean and user-friendly CLI output
+* Clean and user-friendly CLI output with colors
+* Spinner-based loading indicator
+* JSON parsing using `jq`
+* HTTP status handling
+* Retry mechanism for handling temporary API failures
+* Robust error handling for invalid locations and API issues
 
 **Skills:**
 
 * API integration (`curl`)
+* JSON parsing using `jq`
 * CLI design using `case` statements
-* Text processing (`awk`, `grep`)
 * Error handling and validation
+* Handling API reliability with retry logic
 
 ---
 
@@ -238,8 +243,10 @@ A production-style CLI tool that fetches real-time weather data using an externa
 
 -  7 Projects Completed
 -  Strengthening real-world debugging and log analysis skills
--  Enhancing scripts to production-level quality
+-  Enhancing scripts to production-level quality (retry logic, API reliability)
+-  Started Docker fundamentals (containers, lifecycle, execution)
 -  Preparing for CI/CD and containerization
+
 
 ---
 
