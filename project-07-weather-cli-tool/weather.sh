@@ -4,6 +4,9 @@ set -euo pipefail
 LOCATION=""
 TEMP_ONLY=false
 
+MAX_RETRIES=3
+RETRY_DELAY=2
+
 RED="\033[0;31m"
 GREEN="\033[0;32m"
 YELLOW="\033[1;33m"
@@ -61,17 +64,38 @@ API_URL="https://wttr.in/${LOCATION}?format=j1"
 #--Fetching weather data
 echo -e "${YELLOW}Fetching weather...${NC}"
 
-curl -sS -w "\n%{http_code}" "$API_URL" > /tmp/weather_response &
+attempt=1
+success=false
 
-spinner
+while [[ $attempt -le $MAX_RETRIES ]]; do
+    echo -e "${YELLOW}Attempt $attempt/$MAX_RETRIES...${NC}"
 
-sleep 0.2
+    curl -sS -w "\n%{http_code}" "$API_URL" > /tmp/weather_response &
+    spinner
 
-response=$(cat /tmp/weather_response)
-rm -f /tmp/weather_response
+    sleep 0.2
 
-body=$(echo "$response" | head -n -1)
-status=$(echo "$response" | tail -n1)
+    response=$(cat /tmp/weather_response)
+    rm -f /tmp/weather_response
+
+    body=$(echo "$response" | head -n -1)
+    status=$(echo "$response" | tail -n1)
+
+    if [[ "$status" -eq 200 ]]; then
+        success=true
+        break
+    fi
+
+    echo -e "${RED}Request failed (status $status). Retrying in $RETRY_DELAY sec...${NC}"
+    sleep $RETRY_DELAY
+
+    ((attempt++))
+done
+
+if [[ "$success" == false ]]; then
+    echo -e "${RED}Error: Failed to fetch weather after $MAX_RETRIES attempts${NC}"
+    exit 1
+fi
 
 #--HTTP Error Handling
 if [[ "$status" -ne 200 ]]; then
