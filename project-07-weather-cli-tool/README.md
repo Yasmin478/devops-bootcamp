@@ -135,6 +135,27 @@ This ensures the tool remains functional even during brief network issues or API
 
 ---
 
+## Run with Docker
+
+### Build image
+
+```
+docker build -t weather-cli .
+```
+### Run container
+
+```
+docker run --rm weather-cli delhi
+```
+### Run temperature only
+
+```
+docker run --rm weather-cli delhi --temp
+```
+> Note: `--rm` automatically removes the container after execution.
+
+---
+
 ## Exit Codes
 
 * `0` → Success
@@ -174,7 +195,6 @@ Humidity: 78%
 * Add JSON output format
 * Add optional logging flag
 * Improve output formatting with colors
-* Containerize the application using Docker
 
 ---
 
