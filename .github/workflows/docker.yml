@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Docker image
-        run: docker build -t weather-cli .
+        run: docker build -t weather-cli ./project-07-weather-cli-tool
