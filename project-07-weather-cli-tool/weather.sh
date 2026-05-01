@@ -54,6 +54,10 @@ for arg in "$@"; do
     esac
 done
 
+if [[ -z "$LOCATION" && -n "${CITY:-}" ]]; then
+    LOCATION="$CITY"
+fi
+
 #--Default location
 if [[ -z "$LOCATION" ]]; then
     echo -e "${YELLOW}Using current location...${NC}"
