@@ -32,6 +32,83 @@ This project demonstrates real-world DevOps practices such as API integration, C
 
 ---
 
+
+
+## Architecture Flow
+
+```text
+Developer
+    ↓
+Push Code to GitHub
+    ↓
+GitHub Actions CI Pipeline
+    ↓
+Build Docker Image
+    ↓
+Push Image to Docker Hub
+    ↓
+EC2 instance pulls Docker image from Docker Hub
+    ↓
+Docker container runs application
+```
+
+---
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions to automate Docker image builds and pushes.
+
+### Workflow
+
+1. Developer pushes code to GitHub
+2. GitHub Actions workflow triggers automatically
+3. Docker image is built
+4. Image is pushed to Docker Hub
+5. EC2 server pulls and runs the image
+
+### Technologies Used
+
+- GitHub Actions
+- Docker Hub
+- AWS EC2
+- Docker
+
+--- 
+
+## Docker Hub
+
+Docker image is automatically published through GitHub Actions CI pipeline.
+
+Image:
+
+```text
+docker pull yasmin478/weather-cli:latest
+```
+
+---
+
+## Deployment on AWS EC2
+
+The application was deployed on an AWS EC2 Ubuntu instance using Docker.
+
+### Deployment Steps
+
+1. Launch Ubuntu EC2 instance
+2. Connect using SSH
+3. Install Docker on EC2
+4. Pull image from Docker Hub
+5. Run container on EC2
+
+### Run on EC2
+
+```bash
+docker pull yasmin478/weather-cli:latest
+
+docker run --rm yasmin478/weather-cli guwahati
+```
+
+---
+
 ## Project Structure
 
 ```
@@ -99,6 +176,27 @@ It demonstrates:
 
 ---
 
+## Run with Docker
+
+### Build image
+
+```
+docker build -t yasmin478/weather-cli .
+```
+### Run container
+
+```
+docker run --rm yasmin478/weather-cli delhi
+```
+### Run temperature only
+
+```
+docker run --rm yasmin478/weather-cli delhi --temp
+```
+> Note: `--rm` automatically removes the container after execution.
+
+---
+
 ## How It Works
 
 1. Parses command-line arguments using `case`
@@ -135,27 +233,6 @@ This ensures the tool remains functional even during brief network issues or API
 
 ---
 
-## Run with Docker
-
-### Build image
-
-```
-docker build -t weather-cli .
-```
-### Run container
-
-```
-docker run --rm weather-cli delhi
-```
-### Run temperature only
-
-```
-docker run --rm weather-cli delhi --temp
-```
-> Note: `--rm` automatically removes the container after execution.
-
----
-
 ## Exit Codes
 
 * `0` → Success
@@ -174,6 +251,14 @@ City: Guwahati, Assam, India
 Temperature: 29°C
 Condition: Partly cloudy
 Humidity: 78%
+```
+
+---
+
+### Workflow File
+
+```text
+.github/workflows/docker.yml
 ```
 
 ---
@@ -202,4 +287,4 @@ Humidity: 78%
 
 **Yasmin Ara Islam**
 
-DevOps Bootcamp Project
+Production-style DevOps project demonstrating Docker, CI/CD automation, and AWS deployment.
