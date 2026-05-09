@@ -73,6 +73,12 @@ This project uses GitHub Actions to automate Docker image builds and pushes.
 - AWS EC2
 - Docker
 
+### Workflow File Location
+
+```text
+devops-bootcamp/.github/workflows/docker.yml
+```
+
 --- 
 
 ## Docker Hub
@@ -111,10 +117,11 @@ docker run --rm yasmin478/weather-cli guwahati
 
 ## Project Structure
 
-```
+```text
 project-07-weather-cli-tool/
 │
 ├── weather.sh
+├── Dockerfile
 └── README.md
 ```
 
