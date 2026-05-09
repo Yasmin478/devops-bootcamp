@@ -9,3 +9,6 @@ backups/
 
 # Clone of repositories
 repos/
+
+# Sensitive files
+*.pem
