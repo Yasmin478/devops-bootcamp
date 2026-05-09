@@ -209,44 +209,71 @@ A production-ready backup automation system that simulates real-world DevOps wor
 
 ---
 
-## ⭐ Project 07: Weather CLI Tool (API-based CLI)
+## ⭐ Project 07: Weather CLI Tool (Dockerized + CI/CD + AWS Deployment)
 
 [View Project](./project-07-weather-cli-tool)
 
-A production-style CLI tool that fetches real-time weather data using an external API.
+A production-style Bash CLI application that fetches real-time weather data using an external API.
 
-**Features:**
+This project demonstrates real-world DevOps practices including:
 
-* Fetch weather for any location
-* Temperature-only mode (`--temp`)
-* Case-insensitive argument handling
-* Built-in help menu (`--help`)
-* Automatic detection of current location
-* Clean and user-friendly CLI output with colors
-* Spinner-based loading indicator
-* JSON parsing using `jq`
-* HTTP status handling
-* Retry mechanism for handling temporary API failures
-* Robust error handling for invalid locations and API issues
+- Docker containerization
+- GitHub Actions CI/CD automation
+- Docker Hub image publishing
+- AWS EC2 deployment
+- API integration and reliability handling
 
-**Skills:**
+### Features
 
-* API integration (`curl`)
-* JSON parsing using `jq`
-* CLI design using `case` statements
-* Error handling and validation
-* Handling API reliability with retry logic
+- Fetch weather for any location
+- Temperature-only mode (`--temp`)
+- Case-insensitive argument handling
+- Built-in help menu (`--help`)
+- Automatic detection of current location
+- Clean CLI output with colors
+- Spinner-based loading indicator
+- JSON parsing using `jq`
+- HTTP status validation
+- Retry mechanism for temporary API failures
+- Robust error handling
+
+### Technologies Used
+
+- Bash
+- Docker
+- GitHub Actions
+- Docker Hub
+- AWS EC2
+- Linux
+- `curl`
+- `jq`
+
+### DevOps Workflow
+
+```text
+GitHub
+   ↓
+GitHub Actions CI Pipeline
+   ↓
+Docker Image Build
+   ↓
+Push to Docker Hub
+   ↓
+Deploy on AWS EC2
+```
 
 ---
 
 ## Current Progress
 
--  7 Projects Completed
--  Strengthening real-world debugging and log analysis skills
--  Enhancing scripts to production-level quality (retry logic, API reliability)
--  Started Docker fundamentals (containers, lifecycle, execution)
--  Preparing for CI/CD and containerization
-
+- 7 DevOps-focused projects completed
+- Built production-style Bash automation tools
+- Dockerized applications using Dockerfile and containers
+- Implemented CI/CD pipelines using GitHub Actions
+- Automated Docker image publishing to Docker Hub
+- Deployed containerized application on AWS EC2
+- Strengthening Linux, networking, and debugging skills
+- Preparing for Kubernetes basics and advanced deployment workflows
 
 ---
 
