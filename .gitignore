@@ -12,3 +12,6 @@ repos/
 
 # Sensitive files
 *.pem
+
+# Virtual environment
+venv/
