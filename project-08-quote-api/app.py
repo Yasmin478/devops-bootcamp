@@ -18,7 +18,7 @@ def home():
 @app.route('/random')
 def random_quote():
     try:
-        response = requests.get(QUOTE_API, timeout=5)
+        response = requests.get(QUOTE_API, timeout=15)
 
         if response.status_code != 200:
             return {
