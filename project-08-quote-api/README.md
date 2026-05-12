@@ -54,7 +54,8 @@ Example response:
 
 ```json
 {
-  "quote": "Discipline is the bridge between goals and accomplishment. - Jim Rohn"
+  "author": "Albert Einstein",
+  "quote": "The person who never made a mistake never tried anything new."
 }
 ```
 
@@ -151,12 +152,20 @@ http://localhost:5000
 
 ---
 
+## External API
+
+This project fetches live quotes from the ZenQuotes API:
+
+https://zenquotes.io/api/random
+
+---
+
 ## How It Works
 
 1. Flask starts an HTTP server
 2. API routes handle incoming requests
-3. Random quote is selected from predefined list
-4. Flask returns JSON response
+3. Flask sends a request to the external ZenQuotes API
+4. Quote data is processed and returned as JSON
 5. Docker container exposes application on port 5000
 
 ---
@@ -169,16 +178,21 @@ http://localhost:5000
 * Dockerizing Python applications
 * Container networking and port mapping
 * Python virtual environments (`venv`)
+* API integration using `requests`
+* Debugging container networking 
+* Handling external API failures/timeouts
 
 ---
 
 ## Future Improvements
 
-* Fetch quotes from external APIs
 * Add quote categories
 * Add CI/CD pipeline using GitHub Actions
 * Deploy container on AWS EC2
 * Add API logging and monitoring
+* Rate limiting
+* Caching
+* Kubernetes deployment
 
 ---
 
