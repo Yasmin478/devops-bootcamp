@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'project-07-weather-cli-tool/**'
 
 jobs:
   build-and-push:
