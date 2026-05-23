@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - 'project-08-quote-api/**'
+      - '.github/workflows/quote-api.yml'
     
 jobs:
   build:

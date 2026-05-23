@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'project-07-weather-cli-tool/**'
+      - '.github/workflows/docker.yml'
 
 jobs:
   build-and-push:
