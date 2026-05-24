@@ -40,7 +40,7 @@ def random_quote():
 @app.route('/health')
 def health():
     return {
-        "status": "healthy"
+        "status": "healthy and running"
     }
 
 if __name__ == '__main__':
