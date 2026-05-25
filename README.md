@@ -21,10 +21,12 @@ Each project builds practical skills required in real production environments.
 
 ## Highlights
 
-- 7 real-world DevOps projects completed (including API-based CLI tools)
-- Production-style Bash scripting
-- Strong focus on observability and automation
-- Hands-on experience with real debugging scenarios
+- 8 real-world DevOps & backend deployment projects completed
+- Production-style Bash scripting and backend API deployment
+- Docker containerization and Docker Hub workflows
+- GitHub Actions CI/CD automation
+- AWS EC2 deployment experience
+- Strong focus on observability, networking, debugging, and automation
 
 ---
 
@@ -32,7 +34,14 @@ Each project builds practical skills required in real production environments.
 
 - Linux
 - Bash Scripting
+- Python
+- Flask
 - Git & GitHub
+- Docker
+- GitHub Actions
+- Docker Hub
+- AWS EC2
+- REST APIs
 - System Monitoring Tools
 - Cron Jobs & Automation
 
@@ -48,10 +57,11 @@ project-04-server-monitor/
 project-05-log-analyzer/
 project-06-backup-automation/
 project-07-weather-cli-tool/
+project-08-quote-api/
 ```
 ---
 
-## 🔧 Key DevOps Concepts Demonstrated
+## Key DevOps Concepts Demonstrated
 
 - Automation using Bash scripting
 - System monitoring and alerting
@@ -61,6 +71,11 @@ project-07-weather-cli-tool/
 - Idempotent scripting practices
 - Cron-based job scheduling
 - Error handling and script reliability
+- Docker containerization
+- CI/CD automation using GitHub Actions
+- Cloud deployment using AWS EC2
+- Container networking and debugging
+- Infrastructure troubleshooting
 
 ---
 
@@ -264,16 +279,68 @@ Deploy on AWS EC2
 
 ---
 
+## ⭐ Project 08: Quote API (Flask + Docker + CI/CD + AWS Deployment)
+
+[View Project](./project-08-quote-api)
+
+A lightweight REST API built with Flask and Docker that serves random motivational quotes through HTTP endpoints.
+
+This project focuses on backend API development, Dockerized deployments, CI/CD automation, cloud deployment, networking, and debugging workflows.
+
+### Features
+
+- REST API built with Flask
+- Random quote endpoint
+- Health check endpoint
+- JSON API responses
+- External API integration
+- Dockerized backend service
+- GitHub Actions CI/CD pipeline
+- Docker Hub image publishing
+- AWS EC2 deployment
+- Networking and deployment debugging
+
+### Technologies Used
+
+- Python
+- Flask
+- Docker
+- GitHub Actions
+- Docker Hub
+- AWS EC2
+- REST APIs
+- Linux
+- curl
+
+### DevOps Workflow
+
+```text
+GitHub
+   ↓
+GitHub Actions CI Pipeline
+   ↓
+Docker Image Build
+   ↓
+Push to Docker Hub
+   ↓
+Deploy on AWS EC2
+```
+
+---
+
 ## Current Progress
 
-- 7 DevOps-focused projects completed
+- 8 DevOps-focused projects completed
 - Built production-style Bash automation tools
-- Dockerized applications using Dockerfile and containers
+- Built and deployed Flask backend APIs
+- Dockerized applications using Docker containers and Dockerfiles
 - Implemented CI/CD pipelines using GitHub Actions
 - Automated Docker image publishing to Docker Hub
-- Deployed containerized application on AWS EC2
-- Strengthening Linux, networking, and debugging skills
+- Deployed containerized applications on AWS EC2
+- Practiced Docker networking and deployment debugging
+- Strengthening Linux, networking, and operational troubleshooting skills
 - Preparing for Kubernetes basics and advanced deployment workflows
+
 
 ---
 
@@ -286,29 +353,22 @@ Deploy on AWS EC2
 
 ---
 
-## Roadmap
-
-- **March–April:** Linux, Bash, Automation  
-- **May:** Git + CI/CD  
-- **June:** Docker  
-- **July:** Kubernetes + AWS  
-- **August:** Final prep + interviews  
-
----
-
 ## Future Projects
 
-- CI/CD Pipeline
-- Dockerized Applications
+- Kubernetes deployments
+- End-to-end DevOps deployment pipelines
+- Monitoring and observability projects
+- Reverse proxy and load balancing setups
 
 ---
 
 ## Currently Working On
 
-- Networking fundamentals (DNS, HTTP/HTTPS, request lifecycle)
-- Preparing for CI/CD pipelines (GitHub Actions)
-- Containerization using Docker
-- Enhancing existing scripts with production-grade features
+- Reinforcing Docker and CI/CD workflows through repetition
+- Improving deployment debugging and networking skills
+- Practicing AWS EC2 container deployments
+- Preparing for Kubernetes fundamentals
+- Building operational confidence with real deployment workflows
 
 ---
 
