@@ -73,7 +73,7 @@ Example response:
 
 ```json
 {
-  "status": "healthy"
+  "status": "healthy and running"
 }
 ```
 
@@ -129,7 +129,7 @@ docker build -t quote-api .
 ### Run container
 
 ```bash
-docker run -p 5000:5000 quote-api
+docker run -d -p 5000:5000 --name quote-api yasmin478/quote-api:latest
 ```
 
 Access application:
@@ -137,6 +137,60 @@ Access application:
 ```text
 http://localhost:5000
 ```
+
+Test API:
+
+``` curl http://localhost:5000/random
+```
+
+---
+
+## Docker Hub
+
+Docker image is published on Docker Hub for deployment and reuse.
+
+Image:
+
+```yasmin478/quote-api:latest
+```
+
+---
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions for automated CI/CD.
+
+### Workflow automation includes:
+
+- Building Docker images automatically
+- Logging into Docker Hub securely using GitHub Secrets
+- Automatically pushing updated images to Docker Hub on every push to the main branch
+
+### Pipeline Flow:
+
+GitHub Push
+↓
+GitHub Actions
+↓
+Docker Build
+↓
+Docker Hub Push
+
+---
+
+## AWS EC2 Deployment
+
+The application was deployed on an AWS EC2 Ubuntu instance using Docker.
+
+Deployment process included:
+
+- Launching EC2 instance
+- Configuring Security Groups
+- Installing Docker on EC2
+- Pulling Docker image from Docker Hub
+- Running the containerized application publicly
+
+The API was tested using both browser requests and curl commands.
 
 ---
 
@@ -170,6 +224,19 @@ https://zenquotes.io/api/random
 
 ---
 
+## Networking & Debugging Concepts Practiced
+
+- localhost vs 0.0.0.0
+- Docker port mapping
+- Container networking
+- EC2 security groups
+- Public vs internal network access
+- Debugging failed external connections
+- Using curl for API testing
+- Inspecting containers using docker ps and docker logs
+
+---
+
 ## Key Learnings
 
 * Building REST APIs using Flask
@@ -181,18 +248,23 @@ https://zenquotes.io/api/random
 * API integration using `requests`
 * Debugging container networking 
 * Handling external API failures/timeouts
+* GitHub Actions CI/CD workflows
+* Docker Hub automation
+* AWS EC2 deployment
+* Cloud networking basics
+* Debugging deployment/networking issues
 
 ---
 
 ## Future Improvements
 
-* Add quote categories
-* Add CI/CD pipeline using GitHub Actions
-* Deploy container on AWS EC2
-* Add API logging and monitoring
-* Rate limiting
-* Caching
-* Kubernetes deployment
+- Add quote categories
+- Add structured logging
+- Add monitoring and metrics
+- Add reverse proxy using Nginx
+- Add API authentication
+- Kubernetes deployment
+- Automated production deployment
 
 ---
 
