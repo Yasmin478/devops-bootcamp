@@ -1,0 +1,30 @@
+name: Kubernetes manifest validation workflow
+
+on:
+  push:
+    branches:
+      - main
+
+    paths:
+      -'kubernetes/**'
+      -'.github/workflows/k8s.yml'
+
+jobs:
+  validate-kubernetes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show Kubernetes directory structure
+        run: ls -R kubernetes
+
+      - name: Validate Kubernetes manifest files
+        run: |
+          for file in $(find kubernetes -type f -name "*.yaml" -o -name "*.yml"); do
+            echo "Validating $file"
+            kubectl apply --dry-run=client -f "$file"
+          done
+
+
