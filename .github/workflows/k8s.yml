@@ -6,8 +6,8 @@ on:
       - main
 
     paths:
-      -'kubernetes/**'
-      -'.github/workflows/k8s.yml'
+      - 'kubernetes/**'
+      - '.github/workflows/k8s.yml'
 
 jobs:
   validate-kubernetes:
@@ -20,11 +20,14 @@ jobs:
       - name: Show Kubernetes directory structure
         run: ls -R kubernetes
 
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
       - name: Validate Kubernetes manifest files
         run: |
-          for file in $(find kubernetes -type f -name "*.yaml" -o -name "*.yml"); do
+          find kubernetes -type f ( -name "*.yaml" -o -name "*.yml" ) | while read -r file; do
             echo "Validating $file"
             kubectl apply --dry-run=client -f "$file"
           done
-
-
