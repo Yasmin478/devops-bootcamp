@@ -25,9 +25,14 @@ jobs:
         with:
           version: 'latest'
 
-      - name: Validate Kubernetes manifest files
+      - name: Install yamllint
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yamllint
+
+      - name: Validate YAML files
         run: |
           find kubernetes -type f \( -name "*.yaml" -o -name "*.yml" \) | while read -r file; do
-            echo "Validating $file"
-            kubectl apply --dry-run=client --validate=false -f "$file"
+            echo "Linting $file"
+            yamllint "$file"
           done
