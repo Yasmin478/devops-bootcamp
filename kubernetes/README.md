@@ -19,6 +19,13 @@ This directory serves as a practical lab for experimenting with Kubernetes resou
 * Scaling applications
 * Declarative configuration using YAML
 * Troubleshooting failed Pods and image pull errors
+* Kubernetes Services
+* Labels and Selectors
+* ClusterIP Services
+* Service discovery
+* Endpoints and EndpointSlices
+* Scaling services with multiple Pods
+* Stable Service IP vs dynamic Pod IPs
 
 ---
 
