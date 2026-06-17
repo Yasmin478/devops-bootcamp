@@ -2,9 +2,24 @@
 
 ## Overview
 
-A hands-on Kubernetes learning environment used to understand container orchestration concepts including Pods, Deployments, ReplicaSets, scaling, and self-healing.
+A hands-on Kubernetes learning environment used to understand container orchestration concepts including Pods, Deployments, ReplicaSets, Services, scaling, and self-healing.
 
-This directory serves as a practical lab for experimenting with Kubernetes resources, intentionally breaking configurations, and learning troubleshooting techniques.
+This directory serves as a practical lab for experimenting with Kubernetes resources, intentionally breaking configurations, observing Kubernetes reconciliation in real time, and learning troubleshooting techniques.
+
+---
+
+## Features
+
+* Creating and managing Pods
+* Creating Deployments and ReplicaSets
+* Declarative configuration using YAML manifests
+* Scaling applications horizontally
+* Self-healing and automatic Pod replacement
+* Troubleshooting failed Pods and image pull errors
+* Creating Services using labels and selectors
+* Internal service discovery using ClusterIP
+* External application exposure using NodePort
+* Load balancing across multiple Pods
 
 ---
 
@@ -14,57 +29,76 @@ This directory serves as a practical lab for experimenting with Kubernetes resou
 * Pods
 * Deployments
 * ReplicaSets
-* Desired State
+* Desired State and reconciliation loop
 * Self-Healing
 * Scaling applications
 * Declarative configuration using YAML
 * Troubleshooting failed Pods and image pull errors
-* Kubernetes Services
 * Labels and Selectors
+* Kubernetes Services
 * ClusterIP Services
+* NodePort Services
 * Service discovery
 * Endpoints and EndpointSlices
-* Scaling services with multiple Pods
 * Stable Service IP vs dynamic Pod IPs
+* Internal vs external cluster networking
 
 ---
 
 ## Project Structure
 
+```text
 kubernetes/
 │
 ├── README.md
 ├── first-pod.yaml
-└── first-deployment.yaml
+├── first-deployment.yaml
+└── first-service.yaml
+```
 
 ---
 
 ## Commands Practiced
 
-Create resources:
+### Create resources
 
+```bash
 kubectl apply -f <file>
+```
 
-View resources:
+### View resources
 
+```bash
 kubectl get pods
 kubectl get deployments
 kubectl get replicasets
+kubectl get svc
+kubectl get endpoints
+kubectl get endpointslices
+```
 
-Inspect resources:
+### Inspect resources
 
+```bash
 kubectl describe pod <pod-name>
 kubectl describe deployment <deployment-name>
 kubectl describe replicaset <replicaset-name>
+kubectl describe svc <service-name>
+```
 
-View logs:
+### View logs
 
+```bash
 kubectl logs <pod-name>
+```
 
-Delete resources:
+### Delete resources
 
+```bash
 kubectl delete pod <pod-name>
 kubectl delete deployment <deployment-name>
+kubectl delete svc <service-name>
+```
 
 ---
 
@@ -79,7 +113,7 @@ kubectl delete deployment <deployment-name>
 
 ### Broken Image Testing
 
-* Used invalid image names
+* Used invalid image names and tags
 * Observed ErrImagePull
 * Observed ImagePullBackOff
 * Investigated Events using kubectl describe
@@ -90,25 +124,66 @@ kubectl delete deployment <deployment-name>
 * Observed Deployment → ReplicaSet → Pod relationship
 * Deleted Pods and watched Kubernetes recreate them
 * Practiced self-healing and reconciliation
+* Scaled Deployments from one replica to multiple replicas
+
+### Service Testing
+
+* Created a ClusterIP Service
+* Observed Service selectors matching Pod labels
+* Inspected Endpoints and EndpointSlices
+* Verified automatic endpoint updates when Pods changed
+* Converted the Service to NodePort
+* Accessed the application externally through browser and mobile devices
+
+---
+
+## Networking Architecture Practiced
+
+```text
+Browser
+   ↓
+Node IP:30080
+   ↓
+NodePort Service
+   ↓
+ClusterIP Service
+   ↓
+Endpoints
+   ↓
+Nginx Pods
+```
 
 ---
 
 ## Key Learnings
 
-* Pods are disposable.
+* Pods are disposable and replaceable.
 * Kubernetes manages desired state declaratively.
 * Deployments manage ReplicaSets.
 * ReplicaSets manage Pods.
-* Deleting Pods does not affect Deployments or ReplicaSets.
 * New Pods receive new names and IP addresses.
 * Kubernetes replaces failed Pods rather than repairing them.
+* Services provide a stable network identity for temporary Pods.
+* Labels and selectors enable Services to discover Pods dynamically.
+* ClusterIP is accessible only inside the cluster.
+* NodePort exposes applications outside the cluster.
+* Endpoints automatically update as Pods are created or deleted.
 
 ---
 
-## Next Topics
+## Future Topics
 
-* Services
-* Environment Variables
+* ConfigMaps and Environment Variables
 * Secrets
-* Nginx Reverse Proxy
-* Deploying Quote API on Kubernetes
+* Persistent Volumes
+* Nginx Reverse Proxy and Ingress
+* Deploying the Quote API on Kubernetes
+* Kubernetes manifests for production deployments
+
+---
+
+## Author
+
+**Yasmin Ara Islam**
+
+Hands-on Kubernetes learning project focused on container orchestration, networking, scaling, self-healing, and troubleshooting using real Kubernetes workloads.
