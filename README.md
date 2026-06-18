@@ -21,11 +21,12 @@ Each project builds practical skills required in real production environments.
 
 ## Highlights
 
-- 8 real-world DevOps & backend deployment projects completed
+- 9 hands-on DevOps, backend, and Kubernetes projects completed
 - Production-style Bash scripting and backend API deployment
 - Docker containerization and Docker Hub workflows
-- GitHub Actions CI/CD automation
+- GitHub Actions CI/CD automation and Kubernetes manifest validation
 - AWS EC2 deployment experience
+- Practical Kubernetes orchestration, scaling, and service networking experience
 - Strong focus on observability, networking, debugging, and automation
 
 ---
@@ -38,6 +39,9 @@ Each project builds practical skills required in real production environments.
 - Flask
 - Git & GitHub
 - Docker
+- Kubernetes
+- YAML
+- kubectl
 - GitHub Actions
 - Docker Hub
 - AWS EC2
@@ -58,6 +62,7 @@ project-05-log-analyzer/
 project-06-backup-automation/
 project-07-weather-cli-tool/
 project-08-quote-api/
+kubernetes/
 ```
 ---
 
@@ -76,6 +81,12 @@ project-08-quote-api/
 - Cloud deployment using AWS EC2
 - Container networking and debugging
 - Infrastructure troubleshooting
+- Kubernetes Pods and Deployments
+- ReplicaSets and desired state reconciliation
+- Self-healing and scaling applications
+- Service discovery using Labels and Selectors
+- ClusterIP and NodePort networking
+- Kubernetes YAML validation using GitHub Actions
 
 ---
 
@@ -328,18 +339,69 @@ Deploy on AWS EC2
 
 ---
 
+---
+
+## ⭐ Kubernetes Learning Lab (Pods, Deployments & Services)
+
+[View Project](./kubernetes)
+
+A hands-on Kubernetes lab focused on understanding container orchestration, self-healing systems, scaling, and Kubernetes networking.
+
+### Features
+
+- Create and manage Pods
+- Create Deployments and ReplicaSets
+- Practice desired state reconciliation
+- Observe self-healing by deleting Pods
+- Scale applications dynamically
+- Create ClusterIP and NodePort Services
+- Explore Labels and Selectors
+- Inspect Endpoints and EndpointSlices
+- Troubleshoot image pull failures
+- Validate Kubernetes manifests using GitHub Actions
+
+### Technologies Used
+
+- Kubernetes
+- kubectl
+- YAML
+- GitHub Actions
+- Linux
+
+### Concepts Practiced
+
+Deployment
+↓
+ReplicaSet
+↓
+Pods
+↓
+Services
+↓
+Endpoints
+↓
+EndpointSlices
+
+---
+
 ## Current Progress
 
-- 8 DevOps-focused projects completed
-- Built production-style Bash automation tools
+## Current Progress
+
+- 9 hands-on DevOps and Kubernetes projects completed
+- Built production-style Bash automation and monitoring tools
 - Built and deployed Flask backend APIs
 - Dockerized applications using Docker containers and Dockerfiles
 - Implemented CI/CD pipelines using GitHub Actions
 - Automated Docker image publishing to Docker Hub
 - Deployed containerized applications on AWS EC2
 - Practiced Docker networking and deployment debugging
-- Strengthening Linux, networking, and operational troubleshooting skills
-- Preparing for Kubernetes basics and advanced deployment workflows
+- Practiced Kubernetes Pods, Deployments, ReplicaSets, and Services
+- Implemented application scaling and self-healing workflows
+- Practiced Kubernetes networking using ClusterIP and NodePort Services
+- Built GitHub Actions workflows for Kubernetes manifest linting and validation
+- Strengthening Linux, networking, debugging, and container orchestration skills
+- Building operational confidence with real-world deployment workflows
 
 
 ---
@@ -355,20 +417,22 @@ Deploy on AWS EC2
 
 ## Future Projects
 
-- Kubernetes deployments
-- End-to-end DevOps deployment pipelines
-- Monitoring and observability projects
-- Reverse proxy and load balancing setups
+- ConfigMaps and Secrets
+- Multi-container Pods
+- Kubernetes Ingress and Reverse Proxy
+- Deploying Quote API on Kubernetes
+- Helm basics
+- Monitoring and observability with Prometheus and Grafana
+- End-to-end Kubernetes deployment pipelines
 
 ---
 
 ## Currently Working On
 
-- Reinforcing Docker and CI/CD workflows through repetition
-- Improving deployment debugging and networking skills
-- Practicing AWS EC2 container deployments
-- Preparing for Kubernetes fundamentals
-- Building operational confidence with real deployment workflows
+- Deepening Kubernetes fundamentals
+- Practicing Kubernetes networking and service discovery
+- Learning ConfigMaps, Secrets, and application deployments
+- Building operational confidence with container orchestration workflows
 
 ---
 
