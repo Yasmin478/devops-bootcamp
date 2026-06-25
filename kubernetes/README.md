@@ -171,6 +171,32 @@ Nginx Pods
 
 ---
 
+## Covered So Far
+
+- Pods
+- Deployments
+- ReplicaSets
+- Scaling
+- Self-Healing
+- ClusterIP Services
+- NodePort Services
+- EndpointSlices
+- ConfigMaps
+- Environment Variables
+
+## ConfigMap Demo
+
+Created a ConfigMap and injected values into a Pod using environment variables.
+
+Learned:
+- ConfigMaps store non-sensitive configuration.
+- Pods can consume ConfigMap values as environment variables.
+- Environment variables are loaded when containers start.
+- Updating a ConfigMap does not automatically update running containers.
+- Pods must be restarted/recreated to pick up updated values.
+
+---
+
 ## Future Topics
 
 * ConfigMaps and Environment Variables
