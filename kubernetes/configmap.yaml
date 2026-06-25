@@ -7,4 +7,6 @@ metadata:
 data:
   APP_ENV: development
   APP_NAME: quote-api
-  LOG_LEVEL: info
+  LOG_LEVEL: debug
+  COMPANY_NAME: YasminTech
+  API_VERSION: v1
