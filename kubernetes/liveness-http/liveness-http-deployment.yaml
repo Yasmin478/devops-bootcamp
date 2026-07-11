@@ -21,17 +21,27 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: yasmin478/flask-liveness:v1
+          image: yasmin478/flask-liveness:v2
 
           ports:
             - containerPort: 5000
 
           livenessProbe:
             httpGet:
-              path: /health
+              path: /live
               port: 5000
 
-            initialDelaySeconds: 5
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 5000
+
+            initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 2
             failureThreshold: 3
