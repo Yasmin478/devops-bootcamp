@@ -5,17 +5,17 @@ kind: Pod
 
 metadata:
   name: hostpath-demo
-  
+
 spec:
   containers:
     - name: app
       image: busybox
       command: ["sh", "-c", "sleep 3600"]
-      
+
       volumeMounts:
         - name: host-storage
           mountPath: /data
-          
+ 
   volumes:
     - name: host-storage
       hostPath:
