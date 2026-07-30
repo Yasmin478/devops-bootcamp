@@ -4,13 +4,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 
 metadata:
-  name: nginx-ingress
+  name: host-ingress
 
 spec:
   ingressClassName: traefik
 
   rules:
-    - http:
+    - host: app.example.com
+      http:
         paths:
           - path: /
             pathType: Prefix
