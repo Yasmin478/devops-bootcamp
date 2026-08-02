@@ -2,214 +2,232 @@
 
 ## Overview
 
-A hands-on Kubernetes learning environment used to understand container orchestration concepts including Pods, Deployments, ReplicaSets, Services, scaling, and self-healing.
+This directory contains my hands-on Kubernetes learning journey covering application deployment, networking, configuration management, health checks, storage, and traffic routing.
 
-This directory serves as a practical lab for experimenting with Kubernetes resources, intentionally breaking configurations, observing Kubernetes reconciliation in real time, and learning troubleshooting techniques.
+Every topic was learned by building real workloads, intentionally breaking configurations, debugging failures, and observing Kubernetes behavior in real time.
 
----
-
-## Features
-
-* Creating and managing Pods
-* Creating Deployments and ReplicaSets
-* Declarative configuration using YAML manifests
-* Scaling applications horizontally
-* Self-healing and automatic Pod replacement
-* Troubleshooting failed Pods and image pull errors
-* Creating Services using labels and selectors
-* Internal service discovery using ClusterIP
-* External application exposure using NodePort
-* Load balancing across multiple Pods
+The goal of this project is to develop production-oriented Kubernetes skills through practical experience rather than simply learning commands.
 
 ---
 
-## Concepts Learned
+# Topics Covered
 
-* Kubernetes architecture
-* Pods
-* Deployments
-* ReplicaSets
-* Desired State and reconciliation loop
-* Self-Healing
-* Scaling applications
-* Declarative configuration using YAML
-* Troubleshooting failed Pods and image pull errors
-* Labels and Selectors
-* Kubernetes Services
-* ClusterIP Services
-* NodePort Services
-* Service discovery
-* Endpoints and EndpointSlices
-* Stable Service IP vs dynamic Pod IPs
-* Internal vs external cluster networking
+## Workloads
+
+- Pods
+- Deployments
+- ReplicaSets
+- Scaling Applications
+- Self-Healing
+- Desired State and Reconciliation
+
+## Networking
+
+- Labels and Selectors
+- ClusterIP Services
+- NodePort Services
+- EndpointSlices
+- Service Discovery
+- Ingress
+- Host-based Routing
+- Path-based Routing
+- Reverse Proxy Concepts
+
+## Configuration Management
+
+- ConfigMaps
+- Environment Variables
+- Secrets
+
+## Namespaces
+
+- Namespace Isolation
+- Resource Separation
+
+## Resource Management
+
+- Resource Requests
+- Resource Limits
+- Kubernetes QoS Classes
+
+## Health Checks
+
+- Exec Liveness Probes
+- HTTP Liveness Probes
+- Readiness Probes
+
+## Storage
+
+- emptyDir
+- hostPath
+- Persistent Volumes (PV)
+- Persistent Volume Claims (PVC)
+- Static Provisioning
+- Dynamic Provisioning
+- StorageClasses
 
 ---
 
-## Project Structure
+# Hands-on Labs Performed
+
+- Created and managed Pods
+- Built Deployments and ReplicaSets
+- Scaled applications horizontally
+- Practiced Kubernetes self-healing
+- Exposed applications using ClusterIP and NodePort Services
+- Configured ConfigMaps and Secrets
+- Worked with multiple namespaces
+- Tested Liveness and Readiness Probes
+- Explored emptyDir and hostPath volumes
+- Configured Persistent Volumes and Persistent Volume Claims
+- Implemented Static and Dynamic Storage Provisioning
+- Created Ingress resources for host-based and path-based routing
+- Debugged multiple Kubernetes failures and networking issues
+
+---
+
+# Troubleshooting Experience
+
+During these labs, I intentionally reproduced and debugged common Kubernetes issues including:
+
+- ErrImagePull
+- ImagePullBackOff
+- CrashLoopBackOff
+- Failed Liveness Probes
+- Failed Readiness Probes
+- Incorrect Service Selectors
+- StorageClass Mismatch
+- Pending PersistentVolumeClaims
+- Incorrect Ingress Backend
+- Host-based Routing Issues
+- Path-based Routing Issues
+- Application-generated 404 Errors
+
+---
+
+# Project Structure
 
 ```text
 kubernetes/
 │
 ├── README.md
-├── first-pod.yaml
-├── first-deployment.yaml
-└── first-service.yaml
+├── pods/
+├── deployments/
+├── services/
+├── configmaps/
+├── secrets/
+├── namespaces/
+├── resources/
+├── probes/
+├── storage/
+└── ingress/
 ```
 
 ---
 
-## Commands Practiced
+# Commands Practiced
 
-### Create resources
+## Resource Management
 
 ```bash
 kubectl apply -f <file>
-```
-
-### View resources
-
-```bash
+kubectl delete -f <file>
 kubectl get pods
 kubectl get deployments
 kubectl get replicasets
 kubectl get svc
-kubectl get endpoints
-kubectl get endpointslices
+kubectl get ingress
+kubectl get pv
+kubectl get pvc
+kubectl get storageclass
 ```
 
-### Inspect resources
+## Namespace Management
+
+```bash
+kubectl get namespaces
+kubectl create namespace <namespace-name>
+kubectl config set-context --current --namespace=<namespace-name>
+kubectl config view
+kubectl get pods -n <namespace-name>
+kubectl describe pod <pod-name> -n <namespace-name>
+```
+
+## Inspection
 
 ```bash
 kubectl describe pod <pod-name>
 kubectl describe deployment <deployment-name>
 kubectl describe replicaset <replicaset-name>
-kubectl describe svc <service-name>
+kubectl describe service <service-name>
+kubectl describe ingress <ingress-name>
+kubectl describe pvc <pvc-name>
+kubectl describe pv <pv-name>
 ```
 
-### View logs
+## Debugging
 
 ```bash
 kubectl logs <pod-name>
-```
-
-### Delete resources
-
-```bash
-kubectl delete pod <pod-name>
-kubectl delete deployment <deployment-name>
-kubectl delete svc <service-name>
+kubectl exec -it <pod-name> -- sh
+kubectl get endpointslices
 ```
 
 ---
 
-## Experiments Performed
+# Architecture Practiced
 
-### First Pod
-
-* Created an Nginx Pod
-* Inspected Pod details
-* Viewed logs
-* Deleted the Pod
-
-### Broken Image Testing
-
-* Used invalid image names and tags
-* Observed ErrImagePull
-* Observed ImagePullBackOff
-* Investigated Events using kubectl describe
-
-### Deployment Testing
-
-* Created an Nginx Deployment
-* Observed Deployment → ReplicaSet → Pod relationship
-* Deleted Pods and watched Kubernetes recreate them
-* Practiced self-healing and reconciliation
-* Scaled Deployments from one replica to multiple replicas
-
-### Service Testing
-
-* Created a ClusterIP Service
-* Observed Service selectors matching Pod labels
-* Inspected Endpoints and EndpointSlices
-* Verified automatic endpoint updates when Pods changed
-* Converted the Service to NodePort
-* Accessed the application externally through browser and mobile devices
-
----
-
-## Networking Architecture Practiced
+## Kubernetes Networking
 
 ```text
-Browser
-   ↓
-Node IP:30080
-   ↓
-NodePort Service
-   ↓
-ClusterIP Service
-   ↓
-Endpoints
-   ↓
-Nginx Pods
+Client
+   │
+   ▼
+Ingress (Traefik)
+   │
+   ▼
+Service
+   │
+   ▼
+Pods
+```
+
+## Kubernetes Storage
+
+```text
+Pod
+   │
+   ▼
+PersistentVolumeClaim
+   │
+   ▼
+PersistentVolume
+   │
+   ▼
+Storage
 ```
 
 ---
 
-## Key Learnings
+# Key Learnings
 
-* Pods are disposable and replaceable.
-* Kubernetes manages desired state declaratively.
-* Deployments manage ReplicaSets.
-* ReplicaSets manage Pods.
-* New Pods receive new names and IP addresses.
-* Kubernetes replaces failed Pods rather than repairing them.
-* Services provide a stable network identity for temporary Pods.
-* Labels and selectors enable Services to discover Pods dynamically.
-* ClusterIP is accessible only inside the cluster.
-* NodePort exposes applications outside the cluster.
-* Endpoints automatically update as Pods are created or deleted.
-
----
-
-## Covered So Far
-
-- Pods
-- Deployments
-- ReplicaSets
-- Scaling
-- Self-Healing
-- ClusterIP Services
-- NodePort Services
-- EndpointSlices
-- ConfigMaps
-- Environment Variables
-
-## ConfigMap Demo
-
-Created a ConfigMap and injected values into a Pod using environment variables.
-
-Learned:
-- ConfigMaps store non-sensitive configuration.
-- Pods can consume ConfigMap values as environment variables.
-- Environment variables are loaded when containers start.
-- Updating a ConfigMap does not automatically update running containers.
-- Pods must be restarted/recreated to pick up updated values.
+- Kubernetes manages infrastructure declaratively.
+- Deployments maintain the desired state of applications.
+- ReplicaSets automatically replace failed Pods.
+- Services provide stable networking for temporary Pods.
+- ConfigMaps and Secrets separate configuration from application code.
+- Namespaces isolate resources within a cluster.
+- Resource Requests and Limits help manage CPU and memory usage.
+- Liveness and Readiness Probes solve different operational problems.
+- Persistent storage should be accessed through PersistentVolumeClaims.
+- StorageClasses enable automatic storage provisioning.
+- Ingress provides external access using host-based and path-based routing.
+- Debugging Kubernetes requires observing resources, events, logs, and application behavior together.
 
 ---
 
-## Future Topics
-
-* ConfigMaps and Environment Variables
-* Secrets
-* Persistent Volumes
-* Nginx Reverse Proxy and Ingress
-* Deploying the Quote API on Kubernetes
-* Kubernetes manifests for production deployments
-
----
-
-## Author
+# Author
 
 **Yasmin Ara Islam**
 
-Hands-on Kubernetes learning project focused on container orchestration, networking, scaling, self-healing, and troubleshooting using real Kubernetes workloads.
+Hands-on DevOps and Kubernetes learning project focused on production-oriented infrastructure, troubleshooting, automation, and cloud-native technologies.
