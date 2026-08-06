@@ -32,7 +32,28 @@ jobs:
 
       - name: Validate YAML files
         run: |
-          find kubernetes -type f \( -name "*.yaml" -o -name "*.yml" \) | while read -r file; do
+          find kubernetes -type f \( -name "*.yaml" -o -name "*.yml" \) ! -path "*/helm/*"| while read -r file; do
             echo "Linting $file"
             yamllint "$file"
+          done
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Lint Helm charts
+        run: |
+          for chart in kubernetes/helm/*; do
+            if [ -d "$chart" ]; then
+              echo "Linting Helm chart: $chart"
+              helm lint "$chart"
+            fi
+          done
+
+      - name: Render Helm templates
+        run: |
+          for chart in kubernetes/helm/*; do
+            if [ -d "$chart" ]; then
+              echo "Rendering Helm templates for chart: $chart"
+              helm template "$chart"
+            fi
           done
