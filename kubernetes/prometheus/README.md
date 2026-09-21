@@ -88,23 +88,13 @@ kubernetes/
     └── values.yaml
 ```
 
-### Configuration Files
+### Configuration File
 
 **`values.yaml`**
 
 Custom Helm values used for the Prometheus deployment.
 
 Grafana is explicitly disabled in this phase.
-
-**`prometheus-default-values.yaml`**
-
-Reference values generated from the Helm chart.
-
-**`rendered.yaml`**
-
-Kubernetes manifests rendered from the Helm chart.
-
-The rendered manifest also provides a static artifact that can be validated in CI without deploying the monitoring stack.
 
 ---
 

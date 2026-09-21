@@ -158,9 +158,7 @@ kubernetes/
 │
 └── prometheus/
     ├── README.md
-    ├── prometheus-default-values.yaml
-    ├── values.yaml
-    └── rendered.yaml
+    └── values.yaml
 ```
 
 ---
