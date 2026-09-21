@@ -12,6 +12,20 @@ The goal of this project is to develop production-oriented Kubernetes skills thr
 
 # Topics Covered
 
+**## Monitoring and Observability**
+
+* Prometheus
+* PromQL
+* Kubernetes Metrics
+* Application and Infrastructure Metrics
+* Scrape Targets and Scrape Health
+* HTTP Request Metrics
+* CPU and Memory Monitoring
+* Histogram Metrics and Percentiles
+* p50, p95, and p99 Latency
+* Multi-Metric Troubleshooting
+* Grafana *(to be added)*
+
 ## Workloads
 
 - Pods
@@ -83,6 +97,15 @@ The goal of this project is to develop production-oriented Kubernetes skills thr
 - Implemented Static and Dynamic Storage Provisioning
 - Created Ingress resources for host-based and path-based routing
 - Debugged multiple Kubernetes failures and networking issues
+- Deployed Prometheus using the kube-prometheus-stack Helm chart
+- Configured Prometheus with custom Helm values
+- Explored Kubernetes and application metrics
+- Practiced PromQL for querying and aggregating metrics
+- Investigated scrape health using the `up` metric
+- Monitored CPU, memory, request rate, and HTTP status metrics
+- Investigated HTTP latency using histogram metrics and percentile calculations
+- Performed production-style troubleshooting by correlating multiple metrics
+
 
 ---
 
@@ -102,6 +125,13 @@ During these labs, I intentionally reproduced and debugged common Kubernetes iss
 - Host-based Routing Issues
 - Path-based Routing Issues
 - Application-generated 404 Errors
+- Prometheus scrape failures
+- HTTP 503 investigation
+- Application health vs Prometheus scrape health
+- High HTTP request latency
+- Endpoint-specific latency investigation
+- Correlating CPU, memory, traffic, and application metrics
+
 
 ---
 
@@ -109,8 +139,9 @@ During these labs, I intentionally reproduced and debugged common Kubernetes iss
 
 ```text
 kubernetes/
-│
+
 ├── README.md
+│
 ├── pods/
 ├── deployments/
 ├── services/
@@ -120,7 +151,16 @@ kubernetes/
 ├── resources/
 ├── probes/
 ├── storage/
-└── ingress/
+├── ingress/
+│
+├── helm/
+│   └── my-first-chart/
+│
+└── prometheus/
+    ├── README.md
+    ├── prometheus-default-values.yaml
+    ├── values.yaml
+    └── rendered.yaml
 ```
 
 ---
