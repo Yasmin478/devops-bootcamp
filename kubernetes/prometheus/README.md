@@ -85,9 +85,7 @@ The stack also provides Kubernetes-focused metrics through components such as **
 kubernetes/
 └── prometheus/
     ├── README.md
-    ├── prometheus-default-values.yaml
-    ├── values.yaml
-    └── rendered.yaml
+    └── values.yaml
 ```
 
 ### Configuration Files
