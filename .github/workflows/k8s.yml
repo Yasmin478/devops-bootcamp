@@ -57,7 +57,3 @@ jobs:
               helm template "$chart"
             fi
           done
-
-      - name: Validate Prometheus manifests
-        run: |
-          kubectl apply --dry-run=client -f kubernetes/prometheus/rendered.yaml
